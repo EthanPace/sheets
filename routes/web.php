@@ -1,0 +1,61 @@
+<?php
+
+use App\Http\Controllers\CharacterController;
+use App\Http\Controllers\NoteController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('home');
+});
+
+Route::get('/characters', [CharacterController::class, 'index'])->middleware('auth');
+Route::get('/characters/create', [CharacterController::class, 'create'])->middleware('auth');
+Route::get('/characters/{character}', [CharacterController::class, 'show'])->middleware('auth');
+Route::post('/characters/{character}/use', [CharacterController::class, 'use'])->middleware('auth')->can('use', 'character');
+
+Route::get('/notes', [NoteController::class, 'index'])->middleware('auth');
+Route::get('/notes/create', [NoteController::class, 'create'])->middleware('auth');
+Route::post('/notes/create', [NoteController::class, 'store'])->middleware('auth');
+Route::get('/notes/{note}', [NoteController::class, 'show'])->middleware('auth')->can('view', 'note');
+Route::post('/notes/{note}/swatch', [NoteController::class, 'swatch'])->middleware('auth')->can('update', 'note');
+Route::get('/notes/{note}/edit', [NoteController::class, 'edit'])->middleware('auth')->can('update', 'note');
+Route::post('/notes/{note}/edit', [NoteController::class, 'update'])->middleware('auth')->can('update', 'note');
+Route::delete('/notes/{note}/delete', [NoteController::class, 'destroy'])->middleware('auth')->can('delete', 'note');
+
+Route::get('/spells', function () {
+    return view('spells');
+})->middleware('auth');
+
+Route::get('/items', function () {
+    return view('items');
+})->middleware('auth');
+
+Route::get('/potions', function () {
+    return view('potions');
+})->middleware('auth');
+
+Route::get('/almanac', function () {
+    return view('almanac');
+})->middleware('auth');
+
+Route::get('/quests', function () {
+    return view('quests');
+})->middleware('auth');
+
+Route::get('/maps', function () {
+    return view('maps');
+})->middleware('auth');
+
+Route::get('/contacts', function () {
+    return view('contacts');
+})->middleware('auth');
+
+Route::get('/register', [UserController::class, 'create']);
+Route::post('/register', [UserController::class, 'store']);
+
+Route::get('/login', [SessionController::class, 'create'])->name('login');
+Route::post('/login', [SessionController::class, 'store']);
+
+Route::post('/logout', [SessionController::class, 'destroy']);
