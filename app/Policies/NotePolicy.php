@@ -21,7 +21,7 @@ class NotePolicy
      */
     public function view(User $user, Note $note): bool
     {
-        return ($user->role == "admin" || $note->user == $user);
+        return ($user == $note->user || $user->role == "admin");
     }
 
     /**
@@ -29,7 +29,7 @@ class NotePolicy
      */
     public function update(User $user, Note $note): bool
     {
-        return $user == $note->user;
+        return ($user == $note->user || $user->role == "admin");
     }
 
     /**

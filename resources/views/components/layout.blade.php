@@ -11,20 +11,25 @@
         <div class="flex h-screen">
             <aside class="bg-gray-800 text-white w-64 flex-shrink-0 flex flex-col">
                 <!-- App Logo -->
-                <div class="p-4 border-b border-gray-700 flex items-center justify-center h-20">
-                    <h1 class="text-xl font-bold">D&D Campaign Tools</h1>
-                </div>
+                <a class="p-4 py-6 flex items-center justify-center border-b border-gray-700 h-20" href="/">
+                    <h1 class="text-xl font-bold">DUNGEON TOOLS</h1>
+                </a>
 
                 @auth
                     @if (Auth::user()->role == "player")
                         <nav class="flex-1 overflow-y-auto custom-scrollbar p-4">
                             <div class="mb-6 space-y-2">
                                 <x-nav-link page="characters">
-                                    <x-icon.character/>
-                                    Character Sheets
+                                    <x-icon.people/>
+                                    Characters
                                 </x-nav-link>
 
                                 @if (Auth::user()->character != null)
+                                    <x-nav-link page="characters/{{ Auth::user()->character->id }}">
+                                        <x-icon.character/>
+                                        Character Sheet
+                                    </x-nav-link>
+
                                     <x-nav-link page="items">
                                         <x-icon.shield/>
                                         Inventory
@@ -47,23 +52,28 @@
                         <nav class="flex-1 overflow-y-auto custom-scrollbar p-4">
                             <div class="mb-6 space-y-2">
                                 <x-nav-link page="characters">
-                                    <x-icon.character/>
-                                    Character Sheets
+                                    <x-icon.people/>
+                                    Characters
+                                </x-nav-link>
+
+                                <x-nav-link page="items">
+                                    <x-icon.shield/>
+                                    Items
+                                </x-nav-link>
+
+                                <x-nav-link page="spells">
+                                    <x-icon.zap/>
+                                    Spells
                                 </x-nav-link>
 
                                 <x-nav-link page="notes">
                                     <x-icon.note/>
                                     Notes
                                 </x-nav-link>
-
+                            <!--
                                 <x-nav-link page="quests">
                                     <x-icon.clipboard/>
                                     Quests
-                                </x-nav-link>
-
-                                <x-nav-link page="spells">
-                                    <x-icon.zap/>
-                                    Spells
                                 </x-nav-link>
 
                                 <x-nav-link page="potions">
@@ -89,6 +99,7 @@
                                     <x-icon.book/>
                                     Markdown
                                 </x-nav-link>
+                            -->
                             </div>
                         </nav>
                     @endif
@@ -104,9 +115,9 @@
                             </div>
 
                             @if (Auth::user()->role == "admin")
-                                <x-icon.gear size="7"/>
+                                <x-icon.leave size="7"/>
                             @elseif (Auth::user()->role == "runner")
-                                <x-icon.zap size="7"/>
+                                <x-icon.leave size="7"/>
                             @else
                                 <x-icon.leave size="7"/>
                             @endif

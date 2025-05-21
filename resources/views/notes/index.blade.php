@@ -1,8 +1,7 @@
 <x-layout>
     <x-header>
         <x-slot:heading>Notes</x-slot:heading>
-        <x-slot:subheading>Jot me down bad!</x-slot:subheading>
-        <x-get-button href="/notes/create">NEW!</x-get-button>
+        <x-slot:subheading>Write something.</x-slot:subheading>
     </x-header>
 
     <main class="overflow-y-scroll overflow-x-hidden w-full h-screen">

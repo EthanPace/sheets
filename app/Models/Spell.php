@@ -9,4 +9,5 @@ class Spell extends Model
 {
     /** @use HasFactory<\Database\Factories\SpellFactory> */
     use HasFactory;
+    public $timestamps = false;
 }

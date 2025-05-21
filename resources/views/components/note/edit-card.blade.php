@@ -9,15 +9,15 @@
     $paragraph = "500";
 @endphp
 
-<div href="/notes/{{ $note->id }}" class="p-4 bg-{{ $color }}-{{ $background }} border-2 border-{{ $color }}-{{ $border }} rounded-2xl w-full h-full overflow-x-none overflow-y-auto">
+<div href="/notes/{{ $note->id }}" class="p-4 bg-{{ $color }}-{{ $background }} border-2 border-{{ $color }}-{{ $border }} rounded-2xl w-full h-full overflow-x-hidden overflow-y-auto">
     <form class="flex flex-col w-full h-full justify-between" action="/notes/{{ $note->id }}/edit" method="POST">
         @csrf
-        <div class="h-full">
+        <div class="h-full w-full overflow-hidden">
             <input class="font-bold mb-2 text-{{ $text }}-{{ $title }} w-full focus:outline-none focus:outline-b"
                 id="title" 
                 name="title"
                 value="{{ $note->title }}">
-            <textarea markdown="1" class="text-{{ $text }}-{{ $paragraph }} w-full h-full focus:outline-none resize-none" 
+            <textarea markdown="1" class="text-{{ $text }}-{{ $paragraph }} w-full h-full focus:outline-none resize-none text-wrap whitespace-pre-wrap break-words" 
                 id="text" 
                 name="text"
             >{{ $note->text }}</textarea>

@@ -13,7 +13,22 @@ return new class extends Migration
     {
         Schema::create('spells', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
+            $table->string('name')->unique();
+            $table->text('description');
+            $table->text('higher_levels');
+
+            $table->boolean('verbal');
+            $table->boolean('somatic');
+            $table->string('material')->nullable();
+
+            $table->string('range');
+            $table->string('casting_time');
+            $table->string('duration');
+            
+            $table->integer('level');
+            $table->string('school');
+            $table->string('spell_lists');
         });
     }
 

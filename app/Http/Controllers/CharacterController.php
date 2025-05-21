@@ -26,8 +26,10 @@ class CharacterController extends Controller
 
     public function show(Character $character) {
         $actions = Action::where('character_id', $character->id)->get();
+        $user = Auth::user();
 
         return view('characters.show', [
+            'user' => $user,
             'character' => $character,
             'actions' => $actions,
         ]);

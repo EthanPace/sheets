@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\CharacterController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\SpellController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +18,7 @@ Route::get('/characters/{character}', [CharacterController::class, 'show'])->mid
 Route::post('/characters/{character}/use', [CharacterController::class, 'use'])->middleware('auth')->can('use', 'character');
 
 Route::get('/notes', [NoteController::class, 'index'])->middleware('auth');
+Route::get('/notes/export', [NoteController::class, 'export'])->middleware('auth');
 Route::get('/notes/create', [NoteController::class, 'create'])->middleware('auth');
 Route::post('/notes/create', [NoteController::class, 'store'])->middleware('auth');
 Route::get('/notes/{note}', [NoteController::class, 'show'])->middleware('auth')->can('view', 'note');
@@ -24,13 +27,10 @@ Route::get('/notes/{note}/edit', [NoteController::class, 'edit'])->middleware('a
 Route::post('/notes/{note}/edit', [NoteController::class, 'update'])->middleware('auth')->can('update', 'note');
 Route::delete('/notes/{note}/delete', [NoteController::class, 'destroy'])->middleware('auth')->can('delete', 'note');
 
-Route::get('/spells', function () {
-    return view('spells');
-})->middleware('auth');
+Route::get('/items', [InventoryController::class, 'index'])->middleware('auth');
 
-Route::get('/items', function () {
-    return view('items');
-})->middleware('auth');
+Route::get('/spells', [SpellController::class, 'index'])->middleware('auth');
+Route::get('/spells/{spell}', [SpellController::class, 'show'])->middleware('auth');
 
 Route::get('/potions', function () {
     return view('potions');

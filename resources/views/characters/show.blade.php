@@ -2,7 +2,11 @@
     <x-header>
         <x-slot:heading>Character Sheet</x-slot:heading>
         <x-slot:subheading>What's in a name?</x-slot:subheading>
-        <x-post-button action="/characters/{{ $character->id }}/use">SELECT</x-post-button>
+        @if ($character->user == $user)
+            @if ($user->character != $character)
+                <x-post-button action="/characters/{{ $character->id }}/use">SELECT</x-post-button>
+            @endif
+        @endif
     </x-header>
 
     <main class="p-6 flex justify-center overflow-y-auto overflow-x-hidden h-screen flex-1">

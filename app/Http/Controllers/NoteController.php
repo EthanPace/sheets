@@ -26,9 +26,24 @@ class NoteController extends Controller
     public function show(Note $note) {
         $user = Auth::user();
 
-        return view("notes.show", [
+        return view('notes.show', [
             'user' => $user,
             'note' => $note,
+        ]);
+    }
+
+    public function export() {
+        $user = Auth::user();
+
+        if ($user->role == "player" || $user->role == "runner") {
+            $notes = Note::where('user_id', $user->id)->get();
+        } else {
+            $notes = Note::all();
+        }
+
+        return view('notes.export', [
+            'notes' => $notes,
+            'user' => $user,
         ]);
     }
 

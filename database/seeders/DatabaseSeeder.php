@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
             ArchetypeSeeder::class,
             SpeciesSeeder::class,
             BackgroundSeeder::class,
+            SpellSeeder::class,
             CharacterSeeder::class,
             CharacterStatisticSeeder::class,
             SkillSeeder::class,
