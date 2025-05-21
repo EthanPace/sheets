@@ -14,6 +14,7 @@ Route::get('/', function () {
 
 Route::get('/characters', [CharacterController::class, 'index'])->middleware('auth');
 Route::get('/characters/create', [CharacterController::class, 'create'])->middleware('auth');
+Route::post('/characters/none', [CharacterController::class, 'use'])->middleware('auth');
 Route::get('/characters/{character}', [CharacterController::class, 'show'])->middleware('auth');
 Route::post('/characters/{character}/use', [CharacterController::class, 'use'])->middleware('auth')->can('use', 'character');
 

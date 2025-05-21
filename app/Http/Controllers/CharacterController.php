@@ -56,4 +56,14 @@ class CharacterController extends Controller
 
         return redirect('/');
     }
+
+    public function none() {
+        $user = Auth::user();
+
+        $user->update([
+            'character_id' => null,
+        ]);
+
+        return redirect('/characters/');
+    }
 }
