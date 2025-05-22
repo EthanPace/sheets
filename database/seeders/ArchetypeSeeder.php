@@ -68,7 +68,7 @@ class ArchetypeSeeder extends Seeder
             'hit_die' => "10",
             'primary_ability' => "STRENGTH, DEXTERITY",
             'saving_throws' => "STRENGTH, CONSTITUTION",
-            'skill_proficiencies' => "ANIMAL HANDLING, INTIMIDATION", //"ACROBATICS, ANIMAL HANDLING, ATHLETICS, HISTORY, INSIGHT, INTIMIDATION, PERSUASION, PERCEPTION, SURVIVAL"
+            'skill_proficiencies' => "ACROBATICS, ANIMAL HANDLING, ATHLETICS, HISTORY, INSIGHT, INTIMIDATION, PERSUASION, PERCEPTION, SURVIVAL",
             'armor_training' => "LIGHT, MEDIUM, HEAVY, SHIELD",
             'weapon_training' => "SIMPLE, MARTIAL",
             'tool_proficiencies' => null,
@@ -94,7 +94,7 @@ class ArchetypeSeeder extends Seeder
             'hit_die' => "10",
             'primary_ability' => "STRENGTH, CHARISMA",
             'saving_throws' => "WISDOM, CHARISMA",
-            'skill_proficiencies' => "INTIMIDATION, RELIGION", //"ALTHLETICS, INSIGHT, INTIMIDATION, MEDICINE, PERSUASION, RELIGION"
+            'skill_proficiencies' => "ALTHLETICS, INSIGHT, INTIMIDATION, MEDICINE, PERSUASION, RELIGION",
             'armor_training' => "LIGHT, MEDIUM, HEAVY, SHIELD",
             'weapon_training' => "SIMPLE, MARTIAL",
             'tool_proficiencies' => null,

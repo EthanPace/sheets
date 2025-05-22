@@ -40,6 +40,8 @@ class CharacterFactory extends Factory
             'current_hit_points' => fake()->numberBetween(1,100),
             'max_hit_points' => fake()->numberBetween(1,100),
             'temporary_hit_points' => 0,
+
+            'archetype_proficiencies' => fake()->randomElement(["ATHLETICS", "ACROBATICS", "SLEIGHT OF HAND", "STEALTH", "ARCANA", "HISTORY", "INVESTIGATION", "NATURE", "RELIGION", "ANIMAL HANDLING", "INSIGHT", "MEDICINE", "PERCEPTION", "SURVIVAL", "DECEPTION", "INTIMIDATION", "PERFORMANCE", "PERSUASION"]) . ", " . fake()->randomElement(["ATHLETICS", "ACROBATICS", "SLEIGHT OF HAND", "STEALTH", "ARCANA", "HISTORY", "INVESTIGATION", "NATURE", "RELIGION", "ANIMAL HANDLING", "INSIGHT", "MEDICINE", "PERCEPTION", "SURVIVAL", "DECEPTION", "INTIMIDATION", "PERFORMANCE", "PERSUASION"]),
         ];
     }
 }

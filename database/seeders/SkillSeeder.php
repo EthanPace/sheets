@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 class SkillSeeder extends Seeder
 {
     private function prof(Character $character, string $skill): bool {
-        if (in_array($skill, $character->archetype->skills()) or in_array($skill, $character->background->skills())) {
+        if (in_array($skill, $character->arch_skills()) or in_array($skill, $character->background->skills())) {
             return true;
         } else {
             return false;

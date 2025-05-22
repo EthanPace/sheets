@@ -38,6 +38,8 @@ return new class extends Migration
             $table->integer('max_hit_points');
             $table->integer('temporary_hit_points');
 
+            $table->string('archetype_proficiencies');
+
             $table->timestamps();
         });
     }

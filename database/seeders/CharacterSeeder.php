@@ -33,6 +33,8 @@ class CharacterSeeder extends Seeder
             'current_hit_points' => 10,
             'max_hit_points' => 20,
             'temporary_hit_points' => 0,
+
+            'archetype_proficiencies' => "INTIMIDATION, RELIGION",
         ]);
 
         Character::factory()->create([
@@ -52,6 +54,8 @@ class CharacterSeeder extends Seeder
             'current_hit_points' => 10,
             'max_hit_points' => 20,
             'temporary_hit_points' => 0,
+
+            'archetype_proficiencies' => "ANIMAL HANDLING, INTIMIDATION",
         ]);
 
         for ( $i = 0; $i <= 15; $i++ ) {
