@@ -52,6 +52,10 @@ class DatabaseSeeder extends Seeder
             SpellslotsSeeder::class,
             ChargesSeeder::class,
             NoteSeeder::class,
+            ItemSeeder::class,
+            ArmorSeeder::class,
+            WeaponSeeder::class,
+            ToolsSeeder::class,
         ]);
     }
 }

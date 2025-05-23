@@ -19,12 +19,15 @@ return new class extends Migration
             $table->string('type'); // Melee, Ranged
             $table->integer('damage_die');
             $table->integer('damage_die_number');
+            $table->integer('versatile_die')->nullable();
+            $table->integer('versatile_die_number')->nullable();
             $table->string('damage_type');
-            $table->json('properties')->nullable();
+            $table->string('properties')->nullable();
             $table->string('mastery');
             $table->integer('weight');
             $table->integer('cost');
             $table->string('range')->nullable();
+            $table->string('ammunition')->nullable();
         });
     }
 

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('ability');
             $table->integer('weight');
             $table->integer('cost');
-            $table->json('variants')->nullable();
+            $table->string('variants')->nullable();
         });
     }
 

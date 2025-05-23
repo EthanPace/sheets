@@ -9,6 +9,7 @@ class Tools extends Model
 {
     /** @use HasFactory<\Database\Factories\ToolsFactory> */
     use HasFactory;
+    public $timestamps = false;
 
     public function equippable() {
         return $this->morphMany(Inventory::class, 'equippable');

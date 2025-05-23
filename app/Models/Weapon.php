@@ -9,6 +9,7 @@ class Weapon extends Model
 {
     /** @use HasFactory<\Database\Factories\WeaponFactory> */
     use HasFactory;
+    public $timestamps = false;
 
     public function equippable() {
         return $this->morphMany(Inventory::class, 'equippable');

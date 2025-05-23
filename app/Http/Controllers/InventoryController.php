@@ -20,7 +20,7 @@ class InventoryController extends Controller
         $tools = Tools::all();
 
         return view('items.index',  [
-            'user' => Auth::user(),
+            'user' => $user,
             'weapons' => $weapons,
             'armors' => $armors,
             'items' => $items,
