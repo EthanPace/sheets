@@ -13,7 +13,18 @@ return new class extends Migration
     {
         Schema::create('weapons', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name')->unique();
+            $table->string('description')->nullable();
+            $table->string('category'); // Simple, Martial
+            $table->string('type'); // Melee, Ranged
+            $table->integer('damage_die');
+            $table->integer('damage_die_number');
+            $table->string('damage_type');
+            $table->json('properties')->nullable();
+            $table->string('mastery');
+            $table->integer('weight');
+            $table->integer('cost');
+            $table->string('range')->nullable();
         });
     }
 

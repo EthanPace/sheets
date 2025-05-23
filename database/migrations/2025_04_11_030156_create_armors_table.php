@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('armors', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name')->unique();
+            $table->string('description')->nullable();
+            $table->string('category'); // Light, Heavy, Shield
+            $table->string('armor_class'); // AC in plain language
+            $table->integer('base_ac')->nullable();
+            $table->boolean('dex_modifier')->default(false);
+            $table->integer('max_dex_bonus')->nullable();
+            $table->integer('strength_requirement')->nullable();
+            $table->boolean('stealth_disadvantage')->default(false);
+            $table->integer('weight');
+            $table->integer('cost');
         });
     }
 

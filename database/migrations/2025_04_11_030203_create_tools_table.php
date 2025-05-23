@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('tools', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name')->unique();
+            $table->string('description')->nullable();
+            $table->string('category'); // Artisan's Tools, Other Tools
+            $table->string('ability');
+            $table->integer('weight');
+            $table->integer('cost');
+            $table->json('variants')->nullable();
         });
     }
 

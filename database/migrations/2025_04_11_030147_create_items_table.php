@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            
+            $table->string('name')->unique();
+            $table->text('description');
+            $table->string('type');
+            $table->integer('weight')->nullable();
+            $table->integer('cost');
+            $table->json('properties')->nullable();
         });
     }
 
