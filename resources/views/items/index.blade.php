@@ -82,10 +82,10 @@
                     </tbody>
                 </table>
             </div>
-            
+
             <div class="flex flex-col gap-16">
                 <!-- Spellcasting Focuses -->
-                <div class="w-[45rem] h-fit bg-white rounded-3xl border border-2 border-blue-500 mb-4">
+                <div class="w-[45rem] h-fit bg-white rounded-3xl border border-2 border-cyan-500 mb-4">
                     <table class="w-full text-left mb-6">
                         <thead>
                             <tr class="text-left text-lg">
@@ -96,7 +96,7 @@
                         </thead>
                         <tbody class="rounded-b-xl">
                             @foreach ($focuses as $focus)
-                                <tr class="odd:bg-blue-100 pl-4">
+                                <tr class="odd:bg-cyan-100 pl-4">
                                     <th scope="row" class="py-2 px-3 text-left font-normal text-lg pl-6">{{ $focus->name }}</td>
                                     <td class="py-2 px-3 text-right">{{ $focus->weight ? $focus->weight . ' lbs.' : '—' }}</td>
                                     <td class="py-2 px-3 text-right pr-6">{{ $focus->price() }}</td>
@@ -151,7 +151,7 @@
                 </div>
 
                 <!-- Food & Drink -->
-                <div class="w-[45rem] h-fit bg-white rounded-3xl border border-2 border-rose-500 mb-4">
+                <div class="w-[45rem] h-fit bg-white rounded-3xl border border-2 border-yellow-500 mb-4">
                     <table class="w-full text-left mb-6">
                         <thead>
                             <tr class="text-left text-lg">
@@ -161,7 +161,7 @@
                         </thead>
                         <tbody class="rounded-b-xl">
                             @foreach ($foods as $food)
-                                <tr class="odd:bg-rose-100 pl-4">
+                                <tr class="odd:bg-yellow-100 pl-4">
                                     <th scope="row" class="py-2 px-3 text-left font-normal text-lg pl-6">{{ $food->name }}</td>
                                     <td class="py-2 px-3 text-right pr-6">{{ $food->price() }}</td>
                                 </tr>
