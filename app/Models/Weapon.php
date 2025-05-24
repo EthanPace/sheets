@@ -14,4 +14,14 @@ class Weapon extends Model
     public function equippable() {
         return $this->morphMany(Inventory::class, 'equippable');
     }
+
+    public function price() : string {
+        if (($this->cost / 100) >= 1) {
+            return $this->cost / 100 . " GP";
+        } elseif (($this->cost / 10) >= 1) {
+            return $this->cost / 10 . " SP";
+        } else {
+            return $this->cost . " CP";
+        }
+    }
 }

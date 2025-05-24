@@ -16,7 +16,8 @@ class InventoryController extends Controller
         $user = Auth::user();
         $weapons = Weapon::all();
         $armors = Armor::all();
-        $items = Item::all();
+        $items = Item::whereNot('type',"Spellcasting Focus")->get();
+        $focuses = Item::where('type',"Spellcasting Focus")->get();
         $tools = Tools::all();
 
         return view('items.index',  [
@@ -24,6 +25,7 @@ class InventoryController extends Controller
             'weapons' => $weapons,
             'armors' => $armors,
             'items' => $items,
+            'focuses' => $focuses,
             'tools' => $tools,
         ]);
     }
