@@ -35,6 +35,10 @@ class Character extends Model
         return $this->hasMany(CharacterStatistic::class);
     }
 
+    public function spells() {
+        return $this->hasMany(Spell::class);
+    }
+
     public function arch_skills() : array {
         return explode(', ', $this->archetype_proficiencies);
     }

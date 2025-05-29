@@ -56,6 +56,7 @@ class DatabaseSeeder extends Seeder
             ArmorSeeder::class,
             WeaponSeeder::class,
             ToolsSeeder::class,
+            CharacterSpellsSeeder::class,
         ]);
     }
 }

@@ -10,4 +10,8 @@ class Spell extends Model
     /** @use HasFactory<\Database\Factories\SpellFactory> */
     use HasFactory;
     public $timestamps = false;
+
+    public function character() {
+        return $this->belongsToMany(Character::class);
+    }
 }
