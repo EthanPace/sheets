@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Archetype;
 use App\Models\Spell;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +11,32 @@ class SpellController extends Controller
 {
     public function index() {
         $user = Auth::user();
-        $spells = Spell::all();
+        $spells = Spell::whereNot('id',0);
+        $orders = explode(',',request()->query('sort'));
+        $filters = explode(',',request()->query('filter'));
+
+
+        foreach ($orders as $order) {
+            if ($order == "school") {
+                $spells = $spells->orderBy('school');
+            } elseif ($order == "level") {
+                $spells = $spells->orderBy('level');
+            }
+        }
+
+        foreach ($filters as $filter) {
+            if (Archetype::where('name', $filter)->exists()) {
+                $spells = $spells->where('spell_lists', 'LIKE', '%'.$filter.'%');
+            } elseif ($filter == "verbal") {
+                $spells = $spells->where('verbal', true);
+            } elseif ($filter == "somatic") {
+                $spells = $spells->where('somatic', true);
+            } elseif ($filter == "material") {
+                $spells = $spells->whereNot('material', null);
+            }
+        }
+
+        $spells = $spells->get();
 
         return view('spells.index', [
             'user' => $user,
