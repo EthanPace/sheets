@@ -38,11 +38,12 @@
                                         <x-icon.shield/>
                                         <h1 class="invisible sm:visible">Inventory</h1>
                                     </x-nav-link>
-
-                                    <x-nav-link page="spells">
-                                        <x-icon.zap/>
-                                        <h1 class="invisible sm:visible">Spells</h1>
-                                    </x-nav-link>
+                                    @if (Auth::user()->character->archetype->spellcaster != "NONE")
+                                        <x-nav-link page="spells?filter={{ Auth::user()->character->archetype->name }}">
+                                            <x-icon.zap/>
+                                            <h1 class="invisible sm:visible">Spells</h1>
+                                        </x-nav-link>
+                                    @endif
                                 @endif
                                 
                                 <x-nav-link page="notes">
