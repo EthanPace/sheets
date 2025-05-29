@@ -5,9 +5,9 @@
     </x-header>
 
     <main class="p-4 overflow-x-hidden overflow-y-scroll items-center">
-        <div class="flex gap-4 justify-between mt-2">
+        <div class="flex flex-wrap sm:flex-nowrap gap-4 justify-between mt-2">
             <!-- LEFT -->
-            <div class="flex flex-col gap-4 w-3/4">
+            <div class="w-full sm:w-3/4 flex flex-col gap-4">
                 <div class="p-4 bg-white rounded-lg border border-gray-300 flex h-fit flex-col justify-between">
                     <div>
                         <h1 class="text-lg font-bold">{{ $spell->name }}</h1>
@@ -34,7 +34,7 @@
                 @endif
             </div>
             <!-- RIGHT -->
-            <div class="w-1/4 flex flex-col gap-4">
+            <div class="w-full sm:w-1/4 flex flex-col gap-4">
                 <div class="flex flex-col gap-2 rounded-xl p-4 border border-gray-300 bg-white h-fit">
                     <div class="flex gap-2 justify-between">
                         <h2 class="font-bold">Level</h2>

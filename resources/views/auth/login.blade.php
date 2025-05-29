@@ -3,8 +3,8 @@
         <x-slot:heading>Login</x-slot:heading>
         <x-slot:subheading>Log In to edit your characters!</x-slot:subheading>
     </x-header>
-    <main class="mx-auto px-4 py-16 w-full h-full">
-        <form class="bg-white border-2 border-gray-300 rounded-xl px-4 py-6 mx-auto w-[30rem]" action="/login" method="POST">
+    <main class="mx-auto px-4 py-4 sm:py-16 w-full h-full">
+        <form class="bg-white border-2 border-gray-300 rounded-xl px-4 py-6 mx-auto sm:w-[30rem]" action="/login" method="POST">
             @csrf
             <div class="grid grid-cols-1 text-2xl">
                 <div>
