@@ -12,16 +12,13 @@
             <aside class="bg-gray-800 text-white w-14 sm:w-64 flex-shrink-0 flex flex-col">
                 <!-- App Logo -->
                 <a class="p-4 py-6 flex items-center justify-center border-b border-gray-700 h-16 sm:h-20" href="/">
-                    @desktop
-                        <h1 class="text-xl font-bold w-fit">DUNGEON TOOLS</h1>
-                    @elsedesktop
-                        <h1 class="text-xl font-bold">&</h1>
-                    @enddesktop
+                        <h1 class="text-xl font-bold invisible sm:visible w-0 sm:w-fit">DUNGEON TOOLS</h1>
+                        <h1 class="text-xl font-bold visible sm:invisible">&</h1>
                 </a>
 
                 @auth
                     @if (Auth::user()->role == "player")
-                        <nav class="flex-1 overflow-none px-2 sm:px-4 py-4">
+                        <nav class="flex-1 overflow-none px-2 sm:px-4 py-4 mr-1">
                             <div class="mb-6 space-y-2">
                                 <x-nav-link page="characters">
                                     <x-icon.people/>
@@ -31,7 +28,7 @@
                                 @if (Auth::user()->character != null)
                                     <x-nav-link page="characters/{{ Auth::user()->character->id }}">
                                         <x-icon.character/>
-                                        <h1 class="invisible sm:visible">Character Sheet</h1>
+                                        <h1 class="invisible sm:visible">Sheet</h1>
                                     </x-nav-link>
 
                                     <x-nav-link page="items">

@@ -11,8 +11,8 @@
         @endif
     </x-header>
 
+    @desktop
     <main class="p-6 flex justify-center overflow-y-auto overflow-x-hidden h-screen flex-1">
-
         <!-- SIDE BAR -->
         <div class="w-[7rem] h-[7rem] rounded-lg grid grid-cols-1 gap-y-4 mr-4">
             @foreach ($character->statistics as $statistic)
@@ -232,4 +232,5 @@
             </div>
         </div>
     </main>
+    @enddesktop
 </x-layout>
