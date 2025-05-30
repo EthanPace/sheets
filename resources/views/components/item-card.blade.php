@@ -1,5 +1,5 @@
 @props(['item','type'])
-<a href="#" class="bg-white border border-2 border-gray-300 w-full sm:w-[32%] rounded-3xl px-4 py-4 shadow-md hover:shadow-lg transition-shadow duration-300 h-fit" draggable="false">
+<a href="#" class="bg-white border border-2 border-gray-300 w-full mx-auto sm:w-[66%] rounded-3xl px-4 py-4 shadow-md hover:shadow-lg transition-shadow duration-300 h-fit" draggable="false">
     <div class="flex justify-between">
         <h1 class="text-xl font-bold text-gray-500 ml-2">{{ $item->name }}</h1>
         <h1 class="text-xl text-gray-500 mr-2">{{ $type }}</h1>
