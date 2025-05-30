@@ -30,6 +30,8 @@ Route::delete('/notes/{note}/delete', [NoteController::class, 'destroy'])->middl
 
 Route::get('/items', [InventoryController::class, 'index'])->middleware('auth');
 
+Route::get('/inventory', [InventoryController::class, 'inventory'])->middleware('auth');
+
 Route::get('/spells', [SpellController::class, 'index'])->middleware('auth');
 Route::get('/spells/{spell}', [SpellController::class, 'show'])->middleware('auth');
 

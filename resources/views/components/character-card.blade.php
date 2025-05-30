@@ -1,4 +1,4 @@
-<a {{ $attributes }} class="bg-white h-24 sm:h-fit w-full p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300" draggable="false">
+<a {{ $attributes }} class="bg-white h-24 sm:h-fit w-full p-6 border border-2 border-gray-300 rounded-3xl shadow-md hover:shadow-lg transition-shadow duration-300" draggable="false">
     <div class="flex justify-between items-center mb-4">
         <div>
             <h3 class="text-md sm:text-lg font-bold">{{ $character->name }}</h3>

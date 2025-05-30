@@ -39,6 +39,10 @@ class Character extends Model
         return $this->hasMany(CharacterSpells::class);
     }
 
+    public function inventory() {
+        return $this->hasMany(Inventory::class);
+    }
+
     public function arch_skills() : array {
         return explode(', ', $this->archetype_proficiencies);
     }

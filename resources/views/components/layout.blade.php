@@ -15,7 +15,6 @@
                         <h1 class="text-xl font-bold invisible sm:visible w-0 sm:w-fit">DUNGEON TOOLS</h1>
                         <h1 class="text-xl font-bold visible sm:invisible">&</h1>
                 </a>
-
                 @auth
                     @if (Auth::user()->role == "player")
                         <nav class="flex-1 overflow-none px-2 sm:px-4 py-4 mr-1">
@@ -26,13 +25,13 @@
                                 </x-nav-link>
 
                                 @if (Auth::user()->character != null)
-                                    <div class="sm:ml-4 space-y-2">
+                                    <div class="sm:ml-6 space-y-2">
                                         <x-nav-link page="characters/{{ Auth::user()->character->id }}">
                                             <x-icon.character/>
                                             <h1 class="invisible sm:visible">Sheet</h1>
                                         </x-nav-link>
 
-                                        <x-nav-link page="items">
+                                        <x-nav-link page="inventory">
                                             <x-icon.shield/>
                                             <h1 class="invisible sm:visible">Inventory</h1>
                                         </x-nav-link>

@@ -69,20 +69,14 @@ class InventoryController extends Controller
 
         return redirect("/items");
     }
+    
+    public function inventory() {
+        $user = Auth::user();
+        $items = $user->character->inventory;
 
-    public function create() {
-
-    }
-
-    public function edit(Inventory $inventory) {
-
-    }
-
-    public function update(Inventory $inventory) {
-
-    }
-
-    public function destroy(Inventory $inventory) {
-        $inventory->delete();
+        return view("items.inventory", [
+            'user' => $user,
+            'items' => $items,
+        ]);
     }
 }

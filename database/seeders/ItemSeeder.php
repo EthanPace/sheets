@@ -23,7 +23,7 @@ class ItemSeeder extends Seeder
         ]);
 
         Item::factory()->create([
-            'name' => 'Alchemist\'s Fire',
+            'name' => "Alchemist's Fire",
             'description' => 'When you take the Attack action, you can replace one of your attacks with throwing a flask of Alchemist\'s Fire. Target one creature or object you can see within 20 feet of yourself. The target must succeed on a Dexterity saving throw (DC 8 plus your Dexterity modifier and Proficiency Bonus) or take 1d4 Fire damage and start burning.',
             'type' => 'Adventuring Gear',
             'weight' => 1,
@@ -747,99 +747,99 @@ class ItemSeeder extends Seeder
 
         // Spellcasting Focuses
         Item::factory()->create([
-            'name' => 'Arcane Focus - Crystal',
+            'name' => 'Crystal',
             'description' => 'A crystal arcane focus is bejeweled or carved to channel arcane magic. A Sorcerer, Warlock, or Wizard can use such an item as a Spellcasting Focus.',
-            'type' => 'Spellcasting Focus',
+            'type' => 'Arcane Focus',
             'weight' => 1,
             'cost' => 1000,
             'properties' => 'Spellcasting'
         ]);
 
         Item::factory()->create([
-            'name' => 'Arcane Focus - Orb',
+            'name' => 'Orb',
             'description' => 'An orb arcane focus is bejeweled or carved to channel arcane magic. A Sorcerer, Warlock, or Wizard can use such an item as a Spellcasting Focus.',
-            'type' => 'Spellcasting Focus',
+            'type' => 'Arcane Focus',
             'weight' => 3,
             'cost' => 2000,
             'properties' => 'Spellcasting'
         ]);
 
         Item::factory()->create([
-            'name' => 'Arcane Focus - Rod',
+            'name' => 'Rod',
             'description' => 'A rod arcane focus is bejeweled or carved to channel arcane magic. A Sorcerer, Warlock, or Wizard can use such an item as a Spellcasting Focus.',
-            'type' => 'Spellcasting Focus',
+            'type' => 'Arcane Focus',
             'weight' => 2,
             'cost' => 1000,
             'properties' => 'Spellcasting'
         ]);
 
         Item::factory()->create([
-            'name' => 'Arcane Focus - Staff',
+            'name' => 'Staff',
             'description' => 'A staff arcane focus is bejeweled or carved to channel arcane magic and also functions as a Quarterstaff. A Sorcerer, Warlock, or Wizard can use such an item as a Spellcasting Focus.',
-            'type' => 'Spellcasting Focus',
+            'type' => 'Arcane Focus',
             'weight' => 4,
             'cost' => 500,
             'properties' => 'Spellcasting, Weapon'
         ]);
 
         Item::factory()->create([
-            'name' => 'Arcane Focus - Wand',
+            'name' => 'Wand',
             'description' => 'A wand arcane focus is bejeweled or carved to channel arcane magic. A Sorcerer, Warlock, or Wizard can use such an item as a Spellcasting Focus.',
-            'type' => 'Spellcasting Focus',
+            'type' => 'Arcane Focus',
             'weight' => 1,
             'cost' => 1000,
             'properties' => 'Spellcasting'
         ]);
 
         Item::factory()->create([
-            'name' => 'Druidic Focus - Sprig of Mistletoe',
+            'name' => 'Sprig of Mistletoe',
             'description' => 'A sprig of mistletoe druidic focus is carved, tied with ribbon, or painted to channel primal magic. A Druid or Ranger can use such an object as a Spellcasting Focus.',
-            'type' => 'Spellcasting Focus',
+            'type' => 'Druidic Focus',
             'weight' => 0,
             'cost' => 100,
             'properties' => 'Spellcasting'
         ]);
 
         Item::factory()->create([
-            'name' => 'Druidic Focus - Wooden Staff',
+            'name' => 'Wooden Staff',
             'description' => 'A wooden staff druidic focus is carved, tied with ribbon, or painted to channel primal magic and also functions as a Quarterstaff. A Druid or Ranger can use such an object as a Spellcasting Focus.',
-            'type' => 'Spellcasting Focus',
+            'type' => 'Druidic Focus',
             'weight' => 4,
             'cost' => 500,
             'properties' => 'Spellcasting, Weapon'
         ]);
 
         Item::factory()->create([
-            'name' => 'Druidic Focus - Yew Wand',
+            'name' => 'Yew Wand',
             'description' => 'A yew wand druidic focus is carved, tied with ribbon, or painted to channel primal magic. A Druid or Ranger can use such an object as a Spellcasting Focus.',
-            'type' => 'Spellcasting Focus',
+            'type' => 'Druidic Focus',
             'weight' => 1,
             'cost' => 1000,
             'properties' => 'Spellcasting'
         ]);
 
         Item::factory()->create([
-            'name' => 'Holy Symbol - Amulet',
+            'name' => 'Amulet',
             'description' => 'A holy symbol amulet is bejeweled or painted to channel divine magic and can be worn or held. A Cleric or Paladin can use a Holy Symbol as a Spellcasting Focus.',
-            'type' => 'Spellcasting Focus',
+            'type' => 'Holy Symbol',
             'weight' => 1,
             'cost' => 500,
             'properties' => 'Spellcasting'
         ]);
 
         Item::factory()->create([
-            'name' => 'Holy Symbol - Emblem',
+            'name' => 'Emblem',
             'description' => 'A holy symbol emblem is bejeweled or painted to channel divine magic and can be borne on fabric or a Shield. A Cleric or Paladin can use a Holy Symbol as a Spellcasting Focus.',
-            'type' => 'Spellcasting Focus',
+            'type' => 'Holy Symbol',
             'weight' => 0,
             'cost' => 500,
             'properties' => 'Spellcasting'
         ]);
 
         Item::factory()->create([
-            'name' => 'Holy Symbol - Reliquary',
+            'name' => 'Reliquary',
             'description' => 'A holy symbol reliquary is bejeweled or painted to channel divine magic and must be held. A Cleric or Paladin can use a Holy Symbol as a Spellcasting Focus.',
-            'type' => 'Spellcasting Focus',
+            'type' => 'Holy Symbol',
             'weight' => 2,
             'cost' => 500,
             'properties' => 'Spellcasting'

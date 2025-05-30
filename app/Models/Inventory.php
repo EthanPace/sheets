@@ -9,20 +9,13 @@ class Inventory extends Model
 {
     /** @use HasFactory<\Database\Factories\InventoryFactory> */
     use HasFactory;
+    public $timestamps = false;
 
-    public function items() {
-        return $this->morphedByMany(Item::class, 'equippable');
+    public function character() {
+        return $this->belongsTo(Character::class);
     }
 
-    public function weapons() {
-        return $this->morphedByMany(Weapon::class, 'equippable');
-    }
-
-    public function armor() {
-        return $this->morphedByMany(Armor::class, 'equippable');
-    }
-    
-    public function tools() {
-        return $this->morphedByMany(Tools::class, 'equippable');
+    public function equippable() {
+        return $this->morphTo();
     }
 }
