@@ -33,6 +33,8 @@ Route::get('/items', [InventoryController::class, 'index'])->middleware('auth');
 Route::get('/spells', [SpellController::class, 'index'])->middleware('auth');
 Route::get('/spells/{spell}', [SpellController::class, 'show'])->middleware('auth');
 
+Route::get('/spellbook', [SpellController::class, 'spellbook'])->middleware('auth');
+
 Route::get('/potions', function () {
     return view('potions');
 })->middleware('auth');

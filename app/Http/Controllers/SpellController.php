@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Archetype;
 use App\Models\Spell;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SpellController extends Controller
@@ -12,7 +11,7 @@ class SpellController extends Controller
     public function index() {
         $user = Auth::user();
         $spells = Spell::whereNot('id',0);
-        $orders = explode(',',request()->query('sort'));
+        $orders = explode(',',request()->query('order'));
         $filters = explode(',',request()->query('filter'));
 
 
@@ -50,6 +49,16 @@ class SpellController extends Controller
         return view('spells.show', [
             'user' => $user,
             'spell' => $spell,
+        ]);
+    }
+
+    public function spellbook() {
+        $user = Auth::user();
+        $spells = $user->character->spells;
+
+        return view('spells.index', [
+            'user' => $user,
+            'spells' => $spells,
         ]);
     }
 }

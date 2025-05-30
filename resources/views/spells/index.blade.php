@@ -7,6 +7,11 @@
         <div class="grid lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4">
             @foreach ($spells as $spell)
                 @php
+                    // check if the request is on the pivot table, and correct
+                    if (request()->is('spellbook')) {
+                        $spell = $spell->spell;
+                    }
+                    // set the border color by school
                     $spellbg = "white";
                     switch ($spell->school) {
                         case "Abjuration":
