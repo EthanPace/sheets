@@ -13,7 +13,7 @@ class NotePolicy
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return ($user->role == "admin");
     }
 
     /**
@@ -21,7 +21,7 @@ class NotePolicy
      */
     public function view(User $user, Note $note): bool
     {
-        return ($user == $note->user || $user->role == "admin");
+        return ($user->role == "admin" || $user->id == $note->user->id);
     }
 
     /**
@@ -29,7 +29,7 @@ class NotePolicy
      */
     public function update(User $user, Note $note): bool
     {
-        return ($user == $note->user || $user->role == "admin");
+        return ($user->role == "admin" || $user->id == $note->user->id);
     }
 
     /**
@@ -37,6 +37,6 @@ class NotePolicy
      */
     public function delete(User $user, Note $note): bool
     {
-        return ($user == $note->user || $user->role == "admin");
+        return ($user->role == "admin" || $user->id == $note->user->id);
     }
 }

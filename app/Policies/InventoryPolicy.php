@@ -13,7 +13,7 @@ class InventoryPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return ($user->role == "admin");
     }
 
     /**
@@ -21,7 +21,7 @@ class InventoryPolicy
      */
     public function view(User $user, Inventory $inventory): bool
     {
-        return false;
+        return ($user->role == "admin" || $inventory->character->user->id == $user->id);
     }
 
     /**
@@ -29,7 +29,7 @@ class InventoryPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class InventoryPolicy
      */
     public function update(User $user, Inventory $inventory): bool
     {
-        return false;
+        return ($user->role == "admin" || $inventory->character->user->id == $user->id);
     }
 
     /**
@@ -45,22 +45,6 @@ class InventoryPolicy
      */
     public function delete(User $user, Inventory $inventory): bool
     {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Inventory $inventory): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Inventory $inventory): bool
-    {
-        return false;
+        return ($user->role == "admin" || $inventory->character->user->id == $user->id);
     }
 }

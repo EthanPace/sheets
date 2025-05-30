@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('archetype_features', function (Blueprint $table) {
             $table->id();
             
-            $table->foreignIdFor(Archetype::class);
+            $table->foreignIdFor(Archetype::class)->constrained()->onDelete('cascade');
 
             $table->integer('level');
             $table->string('name');

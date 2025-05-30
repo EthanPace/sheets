@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(Character::class);
+            $table->foreignIdFor(Character::class)->constrained()->onDelete('cascade');
 
             $table->enum('name', ['ATHLETICS','ACROBATICS','SLEIGHT OF HAND','STEALTH','ARCANA','HISTORY','INVESTIGATION','NATURE','RELIGION','ANIMAL HANDLING','INSIGHT','MEDICINE','PERCEPTION','SURVIVAL','DECEPTION','INTIMIDATION','PERFORMANCE','PERSUASION']);
             $table->enum('ability', ['STRENGTH', 'DEXTERITY', 'CONSTITUTION', 'WISDOM', 'INTELLIGENCE', 'CHARISMA']);

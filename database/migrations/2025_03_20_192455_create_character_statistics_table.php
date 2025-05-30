@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('character_statistic', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(Character::class);
+            $table->foreignIdFor(Character::class)->constrained()->onDelete('cascade');
 
             $table->enum('ability', ['STRENGTH','DEXTERITY','CONSTITUTION','WISDOM','INTELLIGENCE','CHARISMA']);
             $table->integer('score');

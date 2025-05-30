@@ -18,8 +18,8 @@ return new class extends Migration
         Schema::create('archetype_character', function (Blueprint $table) {
             $table->id();
             
-            $table->foreignIdFor(Character::class);
-            $table->foreignIdFor(Archetype::class);
+            $table->foreignIdFor(Character::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Archetype::class)->constrained()->onDelete('cascade');
             
             $table->integer('level')->default(1);
             //$table->foreignIdFor(Subclass::class);

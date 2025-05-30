@@ -13,7 +13,7 @@ class CharacterPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return ($user->role == "admin");
     }
 
     /**
@@ -21,11 +21,11 @@ class CharacterPolicy
      */
     public function view(User $user, Character $character): bool
     {
-        return false;
+        return ($user->role == "admin" || $character->user->id == $user->id);
     }
 
     public function use(User $user, Character $character): bool {
-        return $character->user == $user;
+        return ($character->user->id == $user->id);
     }
 
     /**
@@ -33,7 +33,7 @@ class CharacterPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class CharacterPolicy
      */
     public function update(User $user, Character $character): bool
     {
-        return false;
+        return ($user->role == "admin" || $character->user->id == $user->id);
     }
 
     /**
@@ -49,22 +49,6 @@ class CharacterPolicy
      */
     public function delete(User $user, Character $character): bool
     {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Character $character): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Character $character): bool
-    {
-        return false;
+        return ($user->role == "admin" || $character->user->id == $user->id);
     }
 }

@@ -18,10 +18,10 @@ return new class extends Migration
         Schema::create('characters', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Species::class);
-            $table->foreignIdFor(Background::class);
-            $table->foreignIdFor(Archetype::class);
+            $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Species::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Background::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Archetype::class)->constrained()->onDelete('cascade');
 
             $table->string('name');
 

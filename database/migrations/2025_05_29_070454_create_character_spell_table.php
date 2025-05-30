@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('character_spell', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(Character::class);
+            $table->foreignIdFor(Character::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(Spell::class);
             
             $table->boolean('prepared');

@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('species_features', function (Blueprint $table) {
             $table->id();
             
-            $table->foreignIdFor(Species::class);
+            $table->foreignIdFor(Species::class)->constrained()->onDelete('cascade');
             
             $table->string('name');
             $table->text('description');
