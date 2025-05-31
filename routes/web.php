@@ -17,7 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/characters', [CharacterController::class, 'index']);
     Route::get('/characters/create', [CharacterController::class, 'create']);
     Route::post('/characters/none', [CharacterController::class, 'none']);
-    Route::get('/characters/{character}', [CharacterController::class, 'show']);
+    Route::get('/characters/{character}', [CharacterController::class, 'show'])->can('view', 'character');
     Route::post('/characters/{character}/use', [CharacterController::class, 'use'])->can('use', 'character');
 
     Route::get('/notes', [NoteController::class, 'index']);
