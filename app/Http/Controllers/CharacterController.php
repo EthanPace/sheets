@@ -64,6 +64,6 @@ class CharacterController extends Controller
             'character_id' => null,
         ]);
 
-        return redirect('/characters/');
+        return redirect('/characters');
     }
 }

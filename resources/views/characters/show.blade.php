@@ -2,7 +2,7 @@
     <x-header>
         <x-slot:heading>Character Sheet</x-slot:heading>
         <x-slot:subheading>What's in a name?</x-slot:subheading>
-        @if ($character->user == $user)
+        @if ($character->user == $user || $user->role == "runner")
             @if (!$user->character || $user->character->id != $character->id)
                 <x-post-button action="/characters/{{ $character->id }}/use">SELECT</x-post-button>
             @else

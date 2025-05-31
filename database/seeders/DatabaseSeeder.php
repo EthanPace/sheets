@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
-            'username' => 'dungeonmaster',
-            'password' => 'password',
+            'username' => 'ethan',
+            'password' => 'alpine',
             'role' => "runner",
         ]);
 

@@ -25,7 +25,7 @@ class CharacterPolicy
     }
 
     public function use(User $user, Character $character): bool {
-        return ($character->user->id == $user->id);
+        return ($user->role == "runner" || $character->user->id == $user->id);
     }
 
     /**

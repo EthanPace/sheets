@@ -16,7 +16,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/characters', [CharacterController::class, 'index']);
     Route::get('/characters/create', [CharacterController::class, 'create']);
-    Route::post('/characters/none', [CharacterController::class, 'use']);
+    Route::post('/characters/none', [CharacterController::class, 'none']);
     Route::get('/characters/{character}', [CharacterController::class, 'show']);
     Route::post('/characters/{character}/use', [CharacterController::class, 'use'])->can('use', 'character');
 
@@ -38,7 +38,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/spells/{spell}', [SpellController::class, 'show']);
 
     Route::get('/spellbook', [SpellController::class, 'spellbook']);
+
+    Route::get('/profile', [UserController::class, 'show']);
+    Route::get('/users', [UserController::class, 'index'])->middleware('admin');
 });
+
+Route::get('/nope', function() { return view('auth.dead'); });
 
 Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);

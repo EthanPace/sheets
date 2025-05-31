@@ -21,13 +21,11 @@ class CharacterFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::where('username', "dungeonmaster")->first()->id,
+            'user_id' => User::where('username', "ethan")->first()->id,
 
             'species_id' => Species::inRandomOrder()->first(),
             'background_id' => Background::inRandomOrder()->first(),
             'archetype_id' => Archetype::inRandomOrder()->first(),
-
-            'user_id' => User::first(),
 
             'name' => fake()->name(),
             'level' => fake()->numberBetween(1,20),
