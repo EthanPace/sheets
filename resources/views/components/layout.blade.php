@@ -17,13 +17,13 @@
                 </a>
                 @auth
                     @player
-                        <x-nav.player/>
+                        <x-nav.section.player/>
                     @endish
                     @runner
-                        <x-nav.runner/>
+                        <x-nav.section.runner/>
                     @endish
                     @admin
-                        <x-nav.admin/>
+                        <x-nav.section.admin/>
                     @endish
                 @endauth
                 <!-- User Profile -->
@@ -52,9 +52,9 @@
                         </a>
                     @elsedesktop
                         <div class="sm:invisible sm:w-0 sm:h-0 w-full pl-2 pr-3 mt-4">
-                            <x-nav-link page="login">
+                            <x-nav.link page="login">
                                         <x-icon.character/>
-                            </x-nav-link>
+                            </x-nav.link>
                         </div>
                     @enddesktop
                 @endguest

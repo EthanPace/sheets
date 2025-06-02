@@ -9,7 +9,7 @@
     <div class="flex justify-between w-full overflow-x-none h-screen flex-1 overflow-y-auto">
         <div class="mx-4 sm:mx-6 mt-4 sm:mt-6 grid grid-cols-1 gap-4 sm:gap-6 w-full">
             @foreach ($characters as $character)
-                <x-character-card href="/characters/{{ $character->id }}" :character="$character"/>
+                <x-card.character link="/characters/{{ $character->id }}" :character="$character"/>
             @endforeach
         </div>
     </div>

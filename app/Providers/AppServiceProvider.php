@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
             return "<?php if(auth()->user()->character): ?>";
         });
 
-        Blade::directive('selected', function($character_id) {
+        Blade::directive('character', function($character_id) {
             return "<?php if(auth()->user()->character && auth()->user()->character->id == $character_id): ?>";
         });
 
@@ -56,7 +56,63 @@ class AppServiceProvider extends ServiceProvider
             return "<?php if(auth()->user()->character && auth()->user()->character->inventory->isNotEmpty()): ?>";
         });
 
+        Blade::directive('hasspells', function($spellcaster) {
+            return "<?php if($spellcaster != 'NONE'): ?>";
+        });
+
+        Blade::directive('subpage', function($page) {
+            return "<?php if(request()->query('page') == $page): ?>";
+        });
+
+        Blade::directive('subpageorbase', function($page) {
+            return "<?php if(request()->query('page') == $page || request()->query('page') == null): ?>";
+        });
+
         Blade::directive('endish', function () {
+            return "<?php endif; ?>";
+        });
+
+        Blade::directive('endrole', function () {
+            return "<?php endif; ?>";
+        });
+
+        Blade::directive('endadmin', function () {
+            return "<?php endif; ?>";
+        });
+
+        Blade::directive('endnotadmin', function () {
+            return "<?php endif; ?>";
+        });
+
+        Blade::directive('endrunner', function () {
+            return "<?php endif; ?>";
+        });
+
+        Blade::directive('endplayer', function () {
+            return "<?php endif; ?>";
+        });
+
+        Blade::directive('endselective', function () {
+            return "<?php endif; ?>";
+        });
+
+        Blade::directive('endcharacter', function () {
+            return "<?php endif; ?>";
+        });
+
+        Blade::directive('endcaster', function () {
+            return "<?php endif; ?>";
+        });
+
+        Blade::directive('endhasitems', function () {
+            return "<?php endif; ?>";
+        });
+
+        Blade::directive('endhasspells', function() {
+            return "<?php endif; ?>";
+        });
+
+        Blade::directive('endsubpage', function () {
             return "<?php endif; ?>";
         });
     }

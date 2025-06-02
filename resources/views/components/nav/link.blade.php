@@ -1,4 +1,4 @@
-@props(['page' => 'home'])
+@props(['page' => 'dashboard'])
 
 @php
     $classes = "flex items-center px-2 sm:px-4 py-2 rounded-md";

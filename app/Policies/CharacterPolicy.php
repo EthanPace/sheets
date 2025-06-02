@@ -21,7 +21,7 @@ class CharacterPolicy
      */
     public function view(User $user, Character $character): bool
     {
-        return ($user->role == "admin" || $character->user->id == $user->id);
+        return ($user->role == "runner" || $character->user->id == $user->id);
     }
 
     public function use(User $user, Character $character): bool {
