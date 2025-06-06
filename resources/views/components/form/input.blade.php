@@ -1,8 +1,8 @@
-@props(['field', 'title', 'color' => "white", 'border' => "gray-300", 'text' => "gray-500"])
+@props(['field', 'title', 'color' => "white", 'bdr_color' => "gray-300", 'text' => "gray-500", 'padding_y' => 3, 'width' => "full", 'bdr' => "border"])
 <div>
     <label for="{{ $field }}" class="sr-only">{{ $title }}</label>
     <input 
-        class="w-full bg-{{ $color }} border border-{{ $border }} text-{{ $text }} focus:outline-{{ $border }} rounded-lg px-4 py-3 text-start" 
+        class="w-{{ $width }} h-full bg-{{ $color }} {{ $bdr }} border-{{ $bdr_color }} text-{{ $text }} focus:outline-{{ $bdr_color }} rounded-lg px-4 py-{{ $padding_y }} text-start" 
         id="{{ $field }}" 
         name="{{ $field }}" 
         placeholder="{{ $title }}" 

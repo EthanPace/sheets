@@ -41,7 +41,7 @@ class CharacterPolicy
      */
     public function update(User $user, Character $character): bool
     {
-        return ($user->role == "admin" || $character->user->id == $user->id);
+        return ($user->role == "admin" || $user->role == "runner" || $character->user->id == $user->id);
     }
 
     /**

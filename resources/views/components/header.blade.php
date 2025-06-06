@@ -2,7 +2,7 @@
     <div>
         <h2 class="text-lg font-semibold">{{ $heading }}</h2>
         @desktop
-        <p class="text-sm text-gray-500">{{ $subheading }}</p>
+        <p class="text-sm text-gray-500 invisible sm:visible">{{ $subheading }}</p>
         @enddesktop
     </div>
 

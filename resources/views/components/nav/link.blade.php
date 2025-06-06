@@ -10,6 +10,6 @@
     }
 @endphp
 
-<a href="/{{ $page }}" class="{{ $classes }}" {{ $attributes }}>
+<a href="/{{ $page }}" class="{{ $classes }}" {{ $attributes }} draggable=false>
     {{ $slot }}
 </a>

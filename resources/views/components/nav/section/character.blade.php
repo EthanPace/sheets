@@ -17,4 +17,11 @@
             <h1 class="invisible sm:visible">Spellbook</h1>
         </x-nav.link>
     @endish
+
+    @initiative
+        <x-nav.link page="combat">
+            <x-icon.sword/>
+            <h1 class="invisible sm:visible">Combat</h1>
+        </x-nav.link>
+    @endish
 </div>

@@ -60,6 +60,10 @@ class AppServiceProvider extends ServiceProvider
             return "<?php if($spellcaster != 'NONE'): ?>";
         });
 
+        Blade::directive('initiative', function() {
+            return "<?php if(auth()->user()->character && auth()->user()->character->turn_order > 0): ?>";
+        });
+
         Blade::directive('subpage', function($page) {
             return "<?php if(request()->query('page') == $page): ?>";
         });

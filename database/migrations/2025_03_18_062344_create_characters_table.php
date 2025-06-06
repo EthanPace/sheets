@@ -38,6 +38,9 @@ return new class extends Migration
             $table->integer('max_hit_points');
             $table->integer('temporary_hit_points');
 
+            $table->integer('turn_order')->unsigned()->default(0);
+            $table->integer('current_roll')->unsigned()->default(0);
+
             $table->string('archetype_proficiencies');
 
             $table->timestamps();

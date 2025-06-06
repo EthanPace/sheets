@@ -23,6 +23,12 @@
             <x-icon.note/>
             <h1 class="invisible sm:visible">Notes</h1>
         </x-nav.link>
+
+        <x-nav.link page="combat">
+            <x-icon.sword/>
+            <h1 class="invisible sm:visible">Combat</h1>
+        </x-nav.link>
+
     <!--
         <x-nav.link page="quests">
             <x-icon.clipboard/>

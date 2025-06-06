@@ -30,7 +30,7 @@ class CharacterSeeder extends Seeder
             'inspiration' => false,
             'proficiency_bonus' => 2,
 
-            'current_hit_points' => 10,
+            'current_hit_points' => 20,
             'max_hit_points' => 20,
             'temporary_hit_points' => 0,
 
@@ -51,7 +51,7 @@ class CharacterSeeder extends Seeder
             'inspiration' => false,
             'proficiency_bonus' => 2,
 
-            'current_hit_points' => 10,
+            'current_hit_points' => 20,
             'max_hit_points' => 20,
             'temporary_hit_points' => 0,
 
