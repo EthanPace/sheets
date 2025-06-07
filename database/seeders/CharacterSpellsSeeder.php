@@ -15,15 +15,17 @@ class CharacterSpellsSeeder extends Seeder
      */
     public function run(): void
     {
-        foreach (Spell::all() as $spell) {
-            if (in_array("Paladin",explode(', ',$spell->spell_lists))) {
-                CharacterSpells::factory()->create([
-                    'character_id' => Character::where('name', "Kluiekkeer")->first()->id,
-                    'spell_id' => $spell->id,
+        foreach (Character::whereNot('spellcaster',"NONE")->get() as $character) {
+            foreach (Spell::all() as $spell) {
+                if (in_array($character->archetype->name, explode(', ', $spell->spell_lists))) {
+                    CharacterSpells::factory()->create([
+                        'character_id' => $character->id,
+                        'spell_id' => $spell->id,
 
-                    'prepared' => false,
-                    'always_prepared' => false,
-                ]);
+                        'prepared' => false,
+                        'always_prepared' => false,
+                    ]);
+                }
             }
         }
     }

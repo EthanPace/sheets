@@ -138,5 +138,21 @@ Note::factory()->create([
 
 fighting style - Two Weapon Fighting",
 ]);
+
+$user = User::where('username', "ben")->first();
+Note::factory()->create([
+    'user_id' => $user->id,
+    'theme' => "gray",
+    'title' => "Crab Stuff",
+    'text' => "(I deleted your note, sorry)
+
+A single all-blue cardboard puzzle-piece
+An oil encrusted black feather that smells of burning
+A hempen Anklet - Enchanted
+A giant fishhook ->
+        These palm-sized fishhooks are made by the Dragonborn for catching giant river-monsters in the Kemet, the Kheran Delta, and the surrounding lakes. Carved from the bone of some giant desert-beast, they occasionally find their way out to sea in the mouth of some horror or another, but mainly the Triton know of them because the Dragonborn won't stop trying to trade them, despite them being relatively useless to the already sea-dwelling people.
+
+26 Days' Rations - Crab Meat",
+]);
     }
 }

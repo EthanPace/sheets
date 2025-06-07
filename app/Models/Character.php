@@ -36,7 +36,7 @@ class Character extends Model
     }
 
     public function spells() {
-        return $this->hasMany(CharacterSpells::class);
+        return $this->belongsToMany(Spell::class);
     }
 
     public function inventory() {

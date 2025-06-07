@@ -13,16 +13,69 @@ class SpeciesSeeder extends Seeder
      */
     public function run(): void
     {
-        Species::factory()->create(['name' => 'Aasimar']);
-        Species::factory()->create(['name' => 'Dragonborn']);
-        Species::factory()->create(['name' => 'Dwarf']);
-        Species::factory()->create(['name' => 'Elf']);
-        Species::factory()->create(['name' => 'Gnome']);
-        Species::factory()->create(['name' => 'Goliath']);
-        Species::factory()->create(['name' => 'Halfling']);
-        Species::factory()->create(['name' => 'Human']);
-        Species::factory()->create(['name' => 'Orc']);
-        Species::factory()->create(['name' => 'Tiefling']);
+        Species::factory()->create([
+            'name' => 'Dragonborn',
+            'creature_type' => 'Humanoid',
+            'size' => 'medium',
+            'speed' => 30,
+            'darkvision' => 60,
+        ]);
+        Species::factory()->create([
+            'name' => 'Dwarf',
+            'creature_type' => 'Humanoid',
+            'size' => 'medium',
+            'speed' => 30,
+            'darkvision' => 120,
+        ]);
+        Species::factory()->create([
+            'name' => 'Elf',
+            'creature_type' => 'Humanoid',
+            'size' => 'medium',
+            'speed' => 30,
+            'darkvision' => 60,
+        ]);
+        Species::factory()->create([
+            'name' => 'Gnome',
+            'creature_type' => 'Humanoid',
+            'size' => 'small',
+            'speed' => 30,
+            'darkvision' => 60,
+        ]);
+        Species::factory()->create([
+            'name' => 'Goliath',
+            'creature_type' => 'Humanoid',
+            'size' => 'medium',
+            'speed' => 35,
+            'darkvision' => 0,
+        ]);
+        Species::factory()->create([
+            'name' => 'Halfling',
+            'creature_type' => 'Humanoid',
+            'size' => 'small',
+            'speed' => 30,
+            'darkvision' => 0,
+        ]);
+        Species::factory()->create([
+            'name' => 'Human',
+            'creature_type' => 'Humanoid',
+            'size' => 'medium',
+            'speed' => 30,
+            'darkvision' => 0,
+        ]);
+        Species::factory()->create([
+            'name' => 'Orc',
+            'creature_type' => 'Humanoid',
+            'size' => 'medium',
+            'speed' => 30,
+            'darkvision' => 120,
+        ]);
+        Species::factory()->create([
+            'name' => 'Tiefling',
+            'creature_type' => 'Humanoid',
+            'size' => 'medium',
+            'speed' => 30,
+            'darkvision' => 60,
+        ]);
         Species::factory()->create([
             'name' => 'Triton',
             'creature_type' => 'Humanoid',

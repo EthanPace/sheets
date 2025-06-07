@@ -108,5 +108,45 @@ class InventorySeeder extends Seeder
             'equippable_id' => $arrow->id,
             'equippable_type' => Item::class,
         ]);
+
+        $others = Character::whereNotIn('id', [1, 2])->get();
+        
+        foreach ($others as $character) {
+            $weaponCount = rand(2, 3);
+            $randomWeapons = Weapon::inRandomOrder()->take($weaponCount)->get();
+            foreach ($randomWeapons as $weapon) {
+                Inventory::factory()->create([
+                    'character_id' => $character->id,
+                    'equippable_id' => $weapon->id,
+                    'equippable_type' => Weapon::class,
+                ]);
+            }
+
+            $randomArmor = Armor::inRandomOrder()->first();
+            Inventory::factory()->create([
+                'character_id' => $character->id,
+                'equippable_id' => $randomArmor->id,
+                'equippable_type' => Armor::class,
+            ]);
+
+            $itemCount = rand(2, 4);
+            $randomItems = Item::inRandomOrder()->take($itemCount)->get();
+            foreach ($randomItems as $item) {
+                Inventory::factory()->create([
+                    'character_id' => $character->id,
+                    'equippable_id' => $item->id,
+                    'equippable_type' => Item::class,
+                ]);
+            }
+
+            $randomTool = Tools::inRandomOrder()->first();
+            if ($randomTool) {
+                Inventory::factory()->create([
+                    'character_id' => $character->id,
+                    'equippable_id' => $randomTool->id,
+                    'equippable_type' => Tools::class,
+                ]);
+            }
+        }
     }
 }
