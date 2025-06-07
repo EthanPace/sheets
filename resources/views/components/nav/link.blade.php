@@ -11,5 +11,6 @@
 @endphp
 
 <a href="/{{ $page }}" class="{{ $classes }}" {{ $attributes }} draggable=false>
-    {{ $slot }}
+    {{ $icon ?: '' }}
+    <h1 class="invisible sm:visible ml-4">{{ $slot }}</h1>
 </a>

@@ -30,13 +30,14 @@
                 @auth
                     <form action="/logout" method="POST">
                         @csrf
-                        <button class="flex items-center justify-between w-full h-16 sm:h-20 p-4 border-t border-gray-700 hover:bg-gray-600" action="submit">
+                        <button class="flex items-center justify-between w-full h-16 sm:h-20 p-4 border-t border-gray-700 hover:bg-gray-600" type="submit">
                             <div class="w-0 sm:w-fit sm:ml-4 text-start invisible sm:visible">
                                 <p class="text-sm font-medium">{{ strtoupper(Auth::user()->username) }}</p>
                                 <p class="text-xs text-gray-400">{{ strtoupper(Auth::user()->role) }}</p>
                             </div>
 
                             <x-icon.leave size="7"/>
+                        </button>
                     </form>
                 @endauth
 
@@ -53,14 +54,14 @@
                     @elsedesktop
                         <div class="sm:invisible sm:w-0 sm:h-0 w-full pl-2 pr-3 mt-4">
                             <x-nav.link page="login">
-                                        <x-icon.character/>
+                                <x-slot:icon><x-icon.character/></x-slot:icon>
                             </x-nav.link>
                         </div>
                     @enddesktop
                 @endguest
             </aside>
 
-            <main class="flex-1 overflow-none flex flex-col border-none">
+            <main class="flex-1 overflow-hidden flex flex-col border-none">
                 {{ $slot }}
             </main>
         </div>
