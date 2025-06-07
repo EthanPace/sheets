@@ -21,6 +21,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/characters/{character}', [CharacterController::class, 'show'])->can('view', 'character');
     Route::post('/characters/{character}/use', [CharacterController::class, 'use'])->can('use', 'character');
 
+    Route::post('/longrest', [CharacterController::class, 'longrest']);
+
     Route::get('/notes', [NoteController::class, 'index']);
     Route::get('/notes/export', [NoteController::class, 'export']);
     Route::get('/notes/create', [NoteController::class, 'create']);

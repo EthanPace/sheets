@@ -66,4 +66,14 @@ class CharacterController extends Controller
 
         return redirect('/characters');
     }
+
+    public function longrest() {
+        $user = Auth::user();
+        
+        if ($user->character) {
+            $user->character->longrest();
+        }
+
+        return redirect()->back();
+    }
 }

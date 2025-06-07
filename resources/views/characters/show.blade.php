@@ -8,8 +8,9 @@
                     @if (!$user->character || $user->character->id != $character->id)
                         <x-post-button action="/characters/{{ $character->id }}/use">+</x-post-button>
                     @else
-                        <x-post-button action="/initiative/roll">⚄</x-post-button>
-                        <x-post-button action="/characters/none">-</x-post-button>
+                        <x-post-button padding="4" action="/longrest">Z</x-post-button>
+                        <x-post-button padding="4" action="/initiative/roll">⚄</x-post-button>
+                        <x-post-button padding="4" action="/characters/none">-</x-post-button>
                     @endif
                 @endif
             </div>
@@ -21,6 +22,7 @@
                     @if (!$user->character || $user->character->id != $character->id)
                         <x-post-button action="/characters/{{ $character->id }}/use">SELECT</x-post-button>
                     @else
+                        <x-post-button action="/longrest">LONG REST</x-post-button>
                         <x-post-button action="/initiative/roll">INITIATIVE</x-post-button>
                         <x-post-button action="/characters/none">DESELECT</x-post-button>
                     @endif
