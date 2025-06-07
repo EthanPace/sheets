@@ -8,7 +8,10 @@
             @selective
                 <div class="bg-white rounded-xl py-4 px-4 border border-2 border-gray-300 flex flex-wrap sm:justify-between gap-8 items-center sm:w-[48rem]">
                     <div class="flex flex-wrap justify-between w-full sm:w-fit gap-4">
-                        <h1 class="text-2xl font-bold text-gray-500 border-r-2 border-l-2 border-gray-300 px-6 py-2 rounded-lg">{{ $user->character->name }}</h1>
+                        <a  class="text-2xl font-bold text-gray-500 border-r-2 border-l-2 border-gray-300 px-6 py-2 rounded-lg" 
+                            href="/characters/{{ $user->character->id }}" 
+                            draggable=false
+                        >{{ $user->character->name }}</a>
                         @mobile
                             <x-post-button action="/initiative/kill/{{ $user->character->id }}">-</x-post-button>
                         @endmobile
@@ -70,7 +73,7 @@
 
         <section class="flex flex-col gap-4 w-full sm:w-fit">
             @selective
-                <div class="bg-white rounded-xl py-4 px-4 border border-2 border-gray-300 flex justify-between">
+                <a class="bg-white rounded-xl py-4 px-4 border border-2 border-gray-300 flex justify-between" href="/characters/{{ $user->character->id }}" draggable=false>
                     <x-stat height="short">
                         AC
                         <x-slot:mod>{{ $user->character->armor_class }}</x-slot:mod>
@@ -83,7 +86,7 @@
                         SPD
                         <x-slot:mod>{{ $user->character->species->speed }}</x-slot:mod>
                     </x-stat>
-                </div>
+                </a>
 
                 <div class="bg-white rounded-xl py-4 px-4 border border-2 border-gray-300 flex flex-col gap-4 w-full sm:w-[30rem]">
                     <div class="flex items-center justify-between">
@@ -105,7 +108,7 @@
                 </div>
 
                 @if ($user->character->actions->isNotEmpty())
-                    <div class="px-4 pt-4 pb-2 bg-white rounded-xl border border-2 border-gray-300 w-full sm:w-[30rem]">
+                    <a class="px-4 pt-4 pb-2 bg-white rounded-xl border border-2 border-gray-300 w-full sm:w-[30rem]" href="/inventory">
                         @foreach ($user->character->actions as $action)
                             <div class="py-1 grid grid-cols-4 border-b last:border-none mb-1 text-center text-lg">
                                 <h1>{{ $action->name }}</h1>
@@ -114,11 +117,11 @@
                                 <h1>{{ $action->type }}</h1>
                             </div>
                         @endforeach
-                    </div>
+                        </a>
                 @endif
 
                 @if ($user->character->archetype->spellslots)
-                    <div class="grid grid-cols-1 p-4 bg-white rounded-xl border border-2 border-gray-300">
+                    <a class="grid grid-cols-1 p-4 bg-white rounded-xl border border-2 border-gray-300" href="/spellbook">
                         <div class="grid grid-cols-{{ count($user->character->archetype->spellslots->levels()) }} justify-between text-center">
                             @php
                                 $index = 0;
@@ -135,7 +138,7 @@
                                 @endphp
                             @endforeach
                         </div>
-                    </div>
+                    </a>
                 @endif
             @endselective
         </section>

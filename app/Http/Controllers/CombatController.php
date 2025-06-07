@@ -13,7 +13,8 @@ class CombatController extends Controller
         $user = Auth::user();
         $goodies = Character::whereNot('turn_order', 0)->select('id','name','turn_order')->get();
         $baddies = Initiative::whereNot('turn_order', 0)->select('id','name','turn_order')->get();
-        $round = $goodies->merge($baddies)->sortByDesc('turn_order');
+
+        $round = $goodies->concat($baddies)->sortByDesc('turn_order');
 
         return view('combat', [
             'user' => $user,
