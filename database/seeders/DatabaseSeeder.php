@@ -58,6 +58,7 @@ class DatabaseSeeder extends Seeder
             ToolsSeeder::class,
             CharacterSpellsSeeder::class,
             InventorySeeder::class,
+            CharacterSpellslotsSeeder::class,
         ]);
     }
 }

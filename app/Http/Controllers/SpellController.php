@@ -54,11 +54,21 @@ class SpellController extends Controller
 
     public function spellbook() {
         $user = Auth::user();
-        $spells = $user->character->spells;
+        $spells = $user->character->spells->sortBy('level')->values();
 
-        return view('spells.index', [
+        return view('spells.book', [
             'user' => $user,
             'spells' => $spells,
         ]);
+    }
+
+    public function cast(int $level) {
+        $user = Auth::user();
+
+        if ($user->character && $user->character->slots_per_level()[$level - 1] > 0) {
+            $user->character->expend_slot($level);
+        }
+
+        return redirect()->back();
     }
 }

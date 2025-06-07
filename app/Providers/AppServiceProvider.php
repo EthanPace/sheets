@@ -72,6 +72,10 @@ class AppServiceProvider extends ServiceProvider
             return "<?php if(request()->query('page') == $page || request()->query('page') == null): ?>";
         });
 
+        Blade::directive('open', function($open) {
+            return "<?php if($open != null): ?>";
+        });
+
         Blade::directive('endish', function () {
             return "<?php endif; ?>";
         });
@@ -117,6 +121,10 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Blade::directive('endsubpage', function () {
+            return "<?php endif; ?>";
+        });
+
+        Blade::directive('endopen', function () {
             return "<?php endif; ?>";
         });
     }

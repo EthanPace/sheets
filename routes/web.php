@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/spellbook', [SpellController::class, 'spellbook']);
 
+    Route::post('/cast/{level}', [SpellController::class, 'cast']);
+
     Route::get('/combat', [CombatController::class, 'index']);
     Route::post('/combat/damage/{character}', [CombatController::class, 'damage'])->can('update','character');
     Route::post('/combat/heal/{character}', [CombatController::class, 'heal'])->can('update','character');
