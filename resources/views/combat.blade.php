@@ -3,10 +3,10 @@
         <x-slot:heading>Combat</x-slot:heading>
         <x-slot:subheading>Hit your friends!</x-slot:subheading>
     </x-header>
-    <main class="p-4 overflow-y-scroll w-full flex flex-wrap gap-4">
-        <section class="flex flex-col gap-4">
+    <main class="p-4 overflow-y-scroll w-full flex flex-wrap gap-4 justify-between">
+        <section class="flex flex-col gap-4 sm:w-[60%]">
             @selective
-                <div class="bg-white rounded-xl py-4 px-4 border border-2 border-gray-300 flex flex-wrap sm:justify-between gap-8 items-center sm:w-[48rem]">
+                <div class="bg-white rounded-xl py-4 px-4 border border-2 border-gray-300 flex flex-wrap sm:justify-between gap-8 items-center">
                     <div class="flex flex-wrap justify-between w-full sm:w-fit gap-4">
                         <a  class="text-2xl font-bold text-gray-500 border-r-2 border-l-2 border-gray-300 px-6 py-2 rounded-lg" 
                             href="/characters/{{ $user->character->id }}" 
@@ -28,6 +28,7 @@
                         </form>
                         @desktop
                             <x-post-button action="/initiative/roll">ROLL</x-post-button>
+                            <x-post-button action="/initiative/kill/{{ $user->character->id }}">KILL</x-post-button>
                         @elsedesktop
                             <x-post-button action="/initiative/roll">⚄</x-post-button>
                         @enddesktop
@@ -36,7 +37,7 @@
             @endselective
             
             @if ($round->isNotEmpty())
-                <div class="p-4 bg-white border border-2 border-gray-300 rounded-xl flex flex-col gap-y-8 sm:w-[48rem]">
+                <div class="p-4 bg-white border border-2 border-gray-300 rounded-xl flex flex-col gap-y-8">
                     @foreach ($round as $turn)
                         <div class="flex justify-between w-full items-center">
                             <h1 class="sm:text-2xl font-bold text-gray-500 border-r-2 border-l-2 border-gray-300 px-6 py-2 rounded-lg w-3/4 sm:w-[16rem]">{{ $turn->name }}</h1>
@@ -56,7 +57,7 @@
             @endif
 
             @runner
-                <form class="p-4 bg-white border border-2 border-gray-300 rounded-xl w-full sm:w-[48rem] flex flex-col gap-4" method="POST" action="/initiative">
+                <form class="p-4 bg-white border border-2 border-gray-300 rounded-xl w-full flex flex-col gap-4" method="POST" action="/initiative">
                     @csrf
                     <div class="flex w-full justify-between">
                         <div class="w-[73%]">
@@ -71,7 +72,7 @@
             @endrunner
         </section>
 
-        <section class="flex flex-col gap-4 w-full sm:w-fit">
+        <section class="flex flex-col gap-4 sm:w-[38%]">
             @selective
                 <a class="bg-white rounded-xl py-4 px-4 border border-2 border-gray-300 flex justify-between" href="/characters/{{ $user->character->id }}" draggable=false>
                     <x-stat height="short">
@@ -88,7 +89,7 @@
                     </x-stat>
                 </a>
 
-                <div class="bg-white rounded-xl py-4 px-4 border border-2 border-gray-300 flex flex-col gap-4 w-full sm:w-[30rem]">
+                <div class="bg-white rounded-xl py-4 px-4 border border-2 border-gray-300 flex flex-col gap-4">
                     <div class="flex items-center justify-between">
                         <x-button.simple-form theme="red" action="/combat/damage/{{ $user->character->id }}" field="damage" value="1">-</x-button.simple-form>
                             <div class="flex items-center justify-center w-full">
@@ -99,7 +100,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl py-4 px-4 border border-2 border-gray-300 flex flex-col gap-4 w-full sm:w-[30rem]">
+                <div class="bg-white rounded-xl py-4 px-4 border border-2 border-gray-300 flex flex-col gap-4">
                     <form class="flex items-center justify-between gap-4" method="POST" action="/combat/health/{{ $user->character->id }}">
                         @csrf
                         <div class="w-full"><x-form.input field="health" title="health" bdr="border-2" bdr_color="gray-500"/></div>
@@ -108,7 +109,7 @@
                 </div>
 
                 @if ($user->character->actions->isNotEmpty())
-                    <a class="px-4 pt-4 pb-2 bg-white rounded-xl border border-2 border-gray-300 w-full sm:w-[30rem]" href="/inventory">
+                    <a class="px-4 pt-4 pb-2 bg-white rounded-xl border border-2 border-gray-300" href="/inventory">
                         @foreach ($user->character->actions as $action)
                             <div class="py-1 grid grid-cols-4 border-b last:border-none mb-1 text-center text-lg">
                                 <h1>{{ $action->name }}</h1>

@@ -9,7 +9,11 @@
                         <x-post-button action="/characters/{{ $character->id }}/use">+</x-post-button>
                     @else
                         <x-post-button padding="4" action="/longrest">Z</x-post-button>
-                        <x-post-button padding="4" action="/initiative/roll">⚄</x-post-button>
+                        @if($character->turn_order == 0)
+                            <x-post-button padding="4" action="/initiative/roll">⚄</x-post-button>
+                        @else
+                            <x-get-button padding="4" action="/combat">⚄</x-get-button>
+                        @endif
                         <x-post-button padding="4" action="/characters/none">-</x-post-button>
                     @endif
                 @endif
@@ -23,7 +27,11 @@
                         <x-post-button action="/characters/{{ $character->id }}/use">SELECT</x-post-button>
                     @else
                         <x-post-button action="/longrest">LONG REST</x-post-button>
-                        <x-post-button action="/initiative/roll">INITIATIVE</x-post-button>
+                        @if($character->turn_order == 0)
+                            <x-post-button action="/initiative/roll">INITIATIVE</x-post-button>
+                        @else
+                            <x-get-button action="/combat">COMBAT</x-get-button>
+                        @endif
                         <x-post-button action="/characters/none">DESELECT</x-post-button>
                     @endif
                 @endif
