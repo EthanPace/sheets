@@ -18,4 +18,8 @@ class Inventory extends Model
     public function equippable() {
         return $this->morphTo();
     }
+
+    public function type() {
+        return class_basename($this->equippable_type);
+    }
 }

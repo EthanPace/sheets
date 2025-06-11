@@ -48,7 +48,6 @@ class DatabaseSeeder extends Seeder
             SkillSeeder::class,
             SpeciesFeatureSeeder::class,
             ArchetypeFeatureSeeder::class,
-            ActionSeeder::class,
             SpellslotsSeeder::class,
             ChargesSeeder::class,
             NoteSeeder::class,
@@ -58,6 +57,7 @@ class DatabaseSeeder extends Seeder
             ToolsSeeder::class,
             CharacterSpellsSeeder::class,
             InventorySeeder::class,
+            ActionSeeder::class,
             CharacterSpellslotsSeeder::class,
         ]);
     }

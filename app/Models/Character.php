@@ -101,4 +101,8 @@ class Character extends Model
     public function arch_skills() : array {
         return explode(', ', $this->archetype_proficiencies);
     }
+
+    public function stat(String $stat) : int {
+        return $this->statistics->where('ability',$stat)->firstOrFail()->score;
+    }
 }
