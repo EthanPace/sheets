@@ -48,12 +48,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/combat/damage/{character}', [CombatController::class, 'damage'])->can('update','character');
     Route::post('/combat/heal/{character}', [CombatController::class, 'heal'])->can('update','character');
     Route::post('/combat/health/{character}', [CombatController::class, 'health'])->can('update','character');
-
+    
     Route::post('/initiative/set', [CombatController::class, 'set']);
     Route::post('/initiative/roll', [CombatController::class, 'roll']);
-    Route::post('/initiative/kill/{character}', [CombatController::class, 'kill'])->can('use', 'character');
+    Route::post('/initiative/health/{initiative}', [CombatController::class, 'update']);
+    Route::post('/initiative/kill/{character}', [CombatController::class, 'kill'])->can('use', 'character');   
+
     Route::post('/initiative', [CombatController::class, 'store']);
+    Route::post('/initiative/{initiative}', [CombatController::class, 'update']);
     Route::delete('/initiative/{initiative}', [CombatController::class, 'destroy']);
+
 
     Route::get('/profile', [UserController::class, 'show']);
     Route::get('/users', [UserController::class, 'index'])->middleware('admin');

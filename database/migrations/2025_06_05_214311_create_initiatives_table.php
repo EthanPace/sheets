@@ -16,6 +16,7 @@ return new class extends Migration
             
             $table->string('name');
             $table->string('turn_order');
+            $table->integer('current_hit_points');
         });
     }
 

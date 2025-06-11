@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script rel="preload" src="https://cdn.tailwindcss.com"></script>
         @vite(['resources/css/app.css','resources/js/app.js'])
-        <title>Pluto</title>
+        <title>Sheets</title>
     </head>
-    <body class="bg-gray-50 text-gray-800 h-full overflow-none" id="app">
+    <body class="bg-gray-50 text-gray-800 h-full overflow-hidden" id="app">
         <div class="flex h-screen">
             <aside class="bg-gray-800 text-white w-14 sm:w-64 flex-shrink-0 flex flex-col">
                 <!-- App Logo -->

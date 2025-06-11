@@ -11,8 +11,8 @@ class CombatController extends Controller
 {
     public function index() {
         $user = Auth::user();
-        $goodies = Character::whereNot('turn_order', 0)->select('id','name','turn_order')->get();
-        $baddies = Initiative::whereNot('turn_order', 0)->select('id','name','turn_order')->get();
+        $goodies = Character::whereNot('turn_order', 0)->select('id','name','turn_order','current_hit_points')->get();
+        $baddies = Initiative::whereNot('turn_order', 0)->select('id','name','turn_order','current_hit_points')->get();
 
         $round = $goodies->concat($baddies)->sortByDesc('turn_order');
 
@@ -35,7 +35,7 @@ class CombatController extends Controller
             ]);
         }
 
-        return redirect('/combat');
+        return redirect()->back();
     }
 
     public function roll() {
@@ -58,26 +58,35 @@ class CombatController extends Controller
             'turn_order' => 0,
         ]);
 
-        return redirect('/combat');
+        return redirect()->back();
     }
 
     public function store() {
-        $user = Auth::user();
-
         $valid = request()->validate([
             'name' => 'bail|string|max:30',
             'turn_order' => 'integer|max:255',
+            'current_hit_points' => 'integer|max:750',
         ]);
 
         Initiative::create($valid);
 
-        return redirect('/combat');
+        return redirect()->back();
+    }
+
+    public function update(Initiative $initiative) {
+        $valid = request()->validate([
+            'current_hit_points' => 'integer|max:750',
+        ]);
+
+        $initiative->update($valid);
+
+        return redirect()->back();
     }
 
     public function destroy(Initiative $initiative) {
         $initiative->delete();
 
-        return redirect('/combat');
+        return redirect()->back();
     }
 
     public function heal(Character $character) {
@@ -97,7 +106,7 @@ class CombatController extends Controller
             ]);
         }
 
-        return redirect('/combat');
+        return redirect()->back();
     }
 
     public function health(Character $character) {
@@ -119,7 +128,7 @@ class CombatController extends Controller
             ]);
         }
 
-        return redirect('/combat');
+        return redirect()->back();
     }
 
     public function damage(Character $character) {
@@ -139,6 +148,6 @@ class CombatController extends Controller
             ]);
         }
 
-        return redirect('/combat');
+        return redirect()->back();
     }
 }
