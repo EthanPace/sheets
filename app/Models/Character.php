@@ -94,7 +94,7 @@ class Character extends Model
     }
 
     public function longrest(): void {
-        $this->reset_slots();
+        if ($this->archetype->spellcaster != "NONE") { $this->reset_slots(); }
         $this->update(['current_hit_points' => $this->max_hit_points]);
     }
 
