@@ -9,7 +9,22 @@ class Character extends Model
 {
     /** @use HasFactory<\Database\Factories\CharacterFactory> */
     use HasFactory;
-    public $guarded = [];
+    protected $fillable = [
+        'name',
+        'level',
+        'experience',
+        'max_hit_points',
+        'current_hit_points',
+        'armor_class',
+        'speed',
+        'proficiency_bonus',
+        'inspiration',
+        'background_id',
+        'species_id',
+        'archetype_id',
+        'user_id',
+        'archetype_proficiencies'
+    ];
 
     public function user() {
         return $this->belongsTo(User::class);

@@ -66,6 +66,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/nope', function() { return view('auth.dead'); });
 
 Route::get('/login', [SessionController::class, 'create'])->name('login');
-Route::post('/login', [SessionController::class, 'store']);
+Route::post('/login', [SessionController::class, 'store'])->middleware('throttle:5,1');
 
 Route::post('/logout', [SessionController::class, 'destroy']);

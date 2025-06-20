@@ -11,7 +11,7 @@ class NoteController extends Controller
     public function index() {
         $user = Auth::user();
 
-        if ($user->role == "player" || $user->role == "runner") {
+        if ($user->role === "player" || $user->role === "runner") {
             $notes = Note::where('user_id', $user->id)->get();
         } else {
             $notes = Note::all();
@@ -35,7 +35,7 @@ class NoteController extends Controller
     public function export() {
         $user = Auth::user();
 
-        if ($user->role == "player" || $user->role == "runner") {
+        if ($user->role === "player" || $user->role === "runner") {
             $notes = Note::where('user_id', $user->id)->get();
         } else {
             $notes = Note::all();
@@ -49,13 +49,13 @@ class NoteController extends Controller
 
     public function store() {
         $user = Auth::user();
-        $title = strip_tags(request('title'));
+        $title = e(request('title'));
         if (in_array(request('theme'), ["rose","yellow","indigo","gray","cyan","lime","purple","orange","pink"])) {
             $theme = request('theme');
         } else {
             $theme = "yellow";
         }
-        $text = strip_tags(request('text'));
+        $text = e(request('text'));
 
         Note::create([
             'user_id' => $user->id,
@@ -96,13 +96,13 @@ class NoteController extends Controller
     }
 
     public function update(Note $note) {
-        if (request('act') == "delete") {
+        if (request('act') === "delete") {
             $this->destroy($note);
             return redirect('/notes');
         }
 
-        $title = strip_tags(request('title'));
-        $text = strip_tags(request('text'));
+        $title = e(request('title'));
+        $text = e(request('text'));
 
         $note->update([
             'title' => $title,
