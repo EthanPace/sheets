@@ -9,21 +9,13 @@ class Character extends Model
 {
     /** @use HasFactory<\Database\Factories\CharacterFactory> */
     use HasFactory;
+
     protected $fillable = [
-        'name',
-        'level',
-        'experience',
-        'max_hit_points',
-        'current_hit_points',
-        'armor_class',
-        'speed',
-        'proficiency_bonus',
-        'inspiration',
-        'background_id',
-        'species_id',
-        'archetype_id',
-        'user_id',
-        'archetype_proficiencies'
+        'user_id', 'species_id', 'archetype_id', 'background_id',
+        'name', 'draft', 'level', 'experience_points',
+        'armor_class', 'initiative', 'proficiency_bonus', 'inspiration',
+        'current_hit_points', 'max_hit_points', 'temporary_hit_points',
+        'turn_order', 'current_roll', 'archetype_proficiencies',
     ];
 
     public function user() {
@@ -38,8 +30,8 @@ class Character extends Model
         return $this->belongsTo(Archetype::class);
     }
 
-    public function skills() {
-        return $this->hasMany(Skill::class);
+    public function proficiencies() {
+        return $this->hasMany(Proficiency::class);
     }
 
     public function background() {
@@ -68,6 +60,10 @@ class Character extends Model
 
     public function slots_per_level(): array {
         $slots = $this->spellslots;
+
+        if (!$slots) {
+            return [0, 0, 0, 0, 0, 0, 0, 0, 0];
+        }
 
         return [
             $slots->level_one,
@@ -118,6 +114,10 @@ class Character extends Model
     }
 
     public function stat(String $stat) : int {
-        return $this->statistics->where('ability',$stat)->firstOrFail()->score;
+        return $this->statistics->where('statistic_id', Statistic::where('name',$stat)->first()->id)->first()->score;
+    }
+
+    public function can_take(String $skill) : bool {
+        return in_array($skill, $this->arch_skills()) || in_array($skill, $this->background->skills());
     }
 }

@@ -1,66 +1,148 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sheets
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A web-based Dungeons & Dragons 5e character sheet manager and campaign tool. Players can build and track characters; runners (DMs) can manage combat, view all sheets, and oversee sessions.
 
-## About Laravel
+Built with Laravel 12, Blade, and Tailwind CSS. Fully responsive — optimised for both desktop and mobile.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Character Builder
+- Step-through creation: choose species, class, and background, then assign ability scores
+- Automatically calculates ability modifiers, saving throw proficiencies, and spell slots
+- Skill proficiency selection (class- and background-gated, with per-class pick limits)
+- Draft system — characters are saved as drafts until finalised
 
-## Learning Laravel
+### Character Sheet
+- Full stat block: ability scores, modifiers, saving throws, skill proficiencies
+- Hit point tracking (current, max, temporary)
+- Armour class, initiative, proficiency bonus, inspiration
+- Class features and species traits
+- Spell slot tracking with long rest recovery
+- Actions and attack rolls
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Combat Tracker
+- Initiative rolling and manual entry
+- Add enemies and NPCs to the tracker
+- Damage and healing for players and enemies mid-combat
+- Turn order management
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Spellbook
+- Browse the full spell list with filters by class, school, and components
+- Per-character known spells
+- Cast spells directly from the spellbook (tracks slot expenditure)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Inventory
+- Browse weapons, armour, tools, and equipment
+- Per-character inventory management
 
-## Laravel Sponsors
+### Notes
+- Create rich notes with colour themes
+- Player-scoped (players see their own; runners and admins see all)
+- Export functionality
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### User Roles
+| Role | Access |
+|------|--------|
+| **Player** | Own characters, own notes, spellbook, inventory |
+| **Runner** | All characters, all notes, combat management |
+| **Admin** | Full access including user management |
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Requirements
 
-## Contributing
+- PHP 8.2+
+- Composer
+- Node.js & npm
+- SQLite (default) or MySQL / PostgreSQL
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## Installation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+# 1. Clone the repository
+git clone <repo-url>
+cd sheets
 
-## Security Vulnerabilities
+# 2. Install PHP dependencies
+composer install
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# 3. Install Node dependencies
+npm install
 
-## License
+# 4. Configure environment
+cp .env.example .env
+php artisan key:generate
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# 5. Run migrations and seed reference data
+php artisan migrate
+php artisan db:seed
+
+# 6. Build front-end assets
+npm run build
+```
+
+### Development server
+
+```bash
+composer run dev
+```
+
+This starts the Laravel dev server, queue worker, and Vite HMR concurrently.
+
+---
+
+## Environment
+
+Key variables to configure in `.env`:
+
+| Variable | Description |
+|----------|-------------|
+| `APP_URL` | Full URL of your installation |
+| `APP_ENV` | `local` for development, `production` for live |
+| `APP_DEBUG` | `true` locally, **`false` in production** |
+| `DB_CONNECTION` | `sqlite` (default), `mysql`, or `pgsql` |
+| `DB_DATABASE` | Path to SQLite file, or database name for MySQL/Postgres |
+| `SESSION_LIFETIME` | Session timeout in minutes |
+
+For MySQL or PostgreSQL, uncomment and fill in the `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, and `DB_PASSWORD` fields.
+
+---
+
+## Seeded Data
+
+`php artisan db:seed` populates:
+
+- All 12 core classes (Barbarian through Wizard) with spell slots, skill options, and proficiency counts
+- All standard skills linked to their governing ability scores
+- All 6 ability score statistics
+- All standard spells with class lists
+- Species, backgrounds, and starting equipment options
+
+User accounts must be created manually (or add a `UserSeeder` for local development).
+
+---
+
+## Deployment Notes
+
+- Set `APP_DEBUG=false` and `APP_ENV=production` in your production `.env`
+- Run `php artisan config:cache` and `php artisan route:cache` after deploying
+- Run `npm run build` to compile production assets
+- Ensure `storage/` and `bootstrap/cache/` are writable by the web server
+- For SQLite: ensure `database/database.sqlite` is writable
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Laravel 12 |
+| Language | PHP 8.2+ |
+| Database | SQLite / MySQL / PostgreSQL |
+| Frontend | Blade + Tailwind CSS 4 |
+| Asset bundler | Vite 6 |
+| Responsive | riverskies/laravel-mobile-detect |

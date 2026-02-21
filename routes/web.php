@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CharacterBuilderController;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\CombatController;
 use App\Http\Controllers\InventoryController;
@@ -7,7 +8,6 @@ use App\Http\Controllers\NoteController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SpellController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,12 +16,18 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/characters', [CharacterController::class, 'index']);
-    Route::get('/characters/create', [CharacterController::class, 'create']);
+    Route::get('/characters/edit/{character}', [CharacterController::class, 'edit'])->can('update', 'character');
+    Route::post('/characters/update/{character}', [CharacterController::class, 'update'])->can('update', 'character');
     Route::post('/characters/none', [CharacterController::class, 'none']);
     Route::get('/characters/{character}', [CharacterController::class, 'show'])->can('view', 'character');
     Route::post('/characters/{character}/use', [CharacterController::class, 'use'])->can('use', 'character');
 
     Route::post('/longrest', [CharacterController::class, 'longrest']);
+
+    Route::get('/builder/character', [CharacterBuilderController::class, 'create']);
+    Route::post('/builder/character', [CharacterBuilderController::class, 'store']);
+    Route::get('/builder/character/{character}', [CharacterBuilderController::class, 'details'])->can('view', 'character');
+    Route::post('/builder/character/{character}', [CharacterBuilderController::class, 'update'])->can('update', 'character');
 
     Route::get('/notes', [NoteController::class, 'index']);
     Route::get('/notes/export', [NoteController::class, 'export']);
@@ -57,7 +63,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/initiative', [CombatController::class, 'store']);
     Route::post('/initiative/{initiative}', [CombatController::class, 'update']);
     Route::delete('/initiative/{initiative}', [CombatController::class, 'destroy']);
-
 
     Route::get('/profile', [UserController::class, 'show']);
     Route::get('/users', [UserController::class, 'index'])->middleware('admin');

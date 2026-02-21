@@ -25,23 +25,25 @@ return new class extends Migration
 
             $table->string('name');
 
-            $table->integer('level');
-            $table->integer('experience_points');
+            $table->boolean('draft')->default(true);
 
-            $table->integer('armor_class');
-            $table->integer('initiative');
-            $table->integer('proficiency_bonus');
+            $table->integer('level')->unsigned()->default(0);
+            $table->integer('experience_points')->unsigned()->default(0);
 
-            $table->boolean('inspiration');
+            $table->integer('armor_class')->unsigned()->default(0);
+            $table->integer('initiative')->unsigned()->default(0);
+            $table->integer('proficiency_bonus')->unsigned()->default(0);
 
-            $table->integer('current_hit_points');
-            $table->integer('max_hit_points');
-            $table->integer('temporary_hit_points');
+            $table->boolean('inspiration')->default(false);
+
+            $table->integer('current_hit_points')->unsigned()->default(0);
+            $table->integer('max_hit_points')->unsigned()->default(0);
+            $table->integer('temporary_hit_points')->unsigned()->default(0);
 
             $table->integer('turn_order')->unsigned()->default(0);
             $table->integer('current_roll')->unsigned()->default(0);
 
-            $table->string('archetype_proficiencies');
+            $table->string('archetype_proficiencies')->nullable();
 
             $table->timestamps();
         });

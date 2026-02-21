@@ -23,10 +23,6 @@ class Archetype extends Model
         return $this->hasOne(Spellslots::class);
     }
 
-    public function character() {
-        return $this->belongsToOne(Character::class);
-    }
-
     public function abilities() {
         return explode(", ", $this->primary_ability);
     }
@@ -58,4 +54,6 @@ class Archetype extends Model
     public function gear(string $option) {
         return explode(", ", $option);
     }
+
+
 }

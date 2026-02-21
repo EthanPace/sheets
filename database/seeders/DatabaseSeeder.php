@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,33 +13,33 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $users = [
+            ['username' => 'alpine', 'role' => 'admin'],
+            ['username' => 'ethan',  'role' => 'runner'],
+            ['username' => 'ben',    'role' => 'player'],
+            ['username' => 'aadyn',  'role' => 'player'],
+            ['username' => 'james',  'role' => 'player'],
+        ];
 
-        User::factory()->create([
-            'username' => 'alpine',
-            'password' => 'root',
-            'role' => "admin",
-        ]);
+        $this->command->info('');
+        $this->command->info('User passwords (save these now):');
+        $this->command->info(str_repeat('-', 30));
 
-        User::factory()->create([
-            'username' => 'ethan',
-            'password' => 'alpine',
-            'role' => "runner",
-        ]);
+        foreach ($users as $data) {
+            $password = Str::random(12);
+            User::factory()->create([
+                'username' => $data['username'],
+                'password' => $password,
+                'role'     => $data['role'],
+            ]);
+            $this->command->info("{$data['username']}: {$password}");
+        }
 
-        User::factory()->create([
-            'username' => 'ben',
-            'password' => 'password',
-            'role' => "player",
-        ]);
-
-        User::factory()->create([
-            'username' => 'aadyn',
-            'password' => 'password',
-            'role' => "player",
-        ]);
+        $this->command->info(str_repeat('-', 30));
+        $this->command->info('');
 
         $this->call([
+            StatisticSeeder::class,
             ArchetypeSeeder::class,
             SpeciesSeeder::class,
             BackgroundSeeder::class,
@@ -55,6 +56,7 @@ class DatabaseSeeder extends Seeder
             ArmorSeeder::class,
             WeaponSeeder::class,
             ToolsSeeder::class,
+            ProficiencySeeder::class,
             CharacterSpellsSeeder::class,
             InventorySeeder::class,
             ActionSeeder::class,

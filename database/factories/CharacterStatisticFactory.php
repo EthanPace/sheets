@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Character;
 use App\Models\CharacterStatistic;
+use App\Models\Statistic;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +21,7 @@ class CharacterStatisticFactory extends Factory
     {
         return [
             'character_id' => Character::inRandomOrder()->first(),
-            'ability' => fake()->randomElement(['STRENGTH','DEXTERITY','CONSTITUTION','WISDOM','INTELLIGENCE','CHARISMA']),
+            'statistic_id' => Statistic::inRandomOrder()->first(),
             'score' => fake()->numberBetween(9,20),
             'modifier' => fake()->numberBetween(-5,5),
             'proficient' => fake()->boolean(),

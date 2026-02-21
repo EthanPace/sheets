@@ -21,7 +21,8 @@ class ProficiencyFactory extends Factory
         return [
             'character_id' => Character::inRandomOrder()->first(),
             'skill_id' => Skill::inRandomOrder()->first(),
-            'mastery' => fake()->boolean(),
+            'proficient' => false,
+            'mastery' => false,
         ];
     }
 }

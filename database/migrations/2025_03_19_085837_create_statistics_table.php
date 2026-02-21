@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Character;
-use App\Models\Statistic;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('skills', function (Blueprint $table) {
+        Schema::create('statistics', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(Statistic::class)->constrained()->onDelete('cascade');
             $table->string('name');
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('skills');
+        Schema::dropIfExists('statistics');
     }
 };

@@ -29,7 +29,7 @@ class ArchetypeFactory extends Factory
             'starter_gear' => "Javelin, Javelin, Javelin, Javelin, Javelin, Javelin, OR Dagger, Dagger, Dagger, Dagger, Dagger, Dagger, OR 150 GP",
 
             'spellcaster' => fake()->randomElement(['FULL','HALF','NONE']),
-            'has_charges' => false,
+            'spell_list' => "FULL",
         ];
     }
 }

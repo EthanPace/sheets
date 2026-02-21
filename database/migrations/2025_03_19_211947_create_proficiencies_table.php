@@ -15,8 +15,11 @@ return new class extends Migration
     {
         Schema::create('proficiencies', function (Blueprint $table) {
             $table->id();
+
             $table->foreignIdFor(Character::class)->constrained()->onDelete('cascade');
             $table->foreignIdFor(Skill::class)->constrained()->onDelete('cascade');
+
+            $table->boolean('proficient')->default('false');
             $table->boolean('mastery')->default('false');
         });
     }
