@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Character;
+use App\Models\Statistic;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,8 +20,9 @@ class ActionFactory extends Factory
     {
         return [
             'character_id' => Character::inRandomOrder()->first(),
+            'statistic_id' => Statistic::inRandomOrder()->first(),
+
             'name' => fake()->randomElement(['Longsword','Javelin','Scimitar','Shortsword','Longbow']),
-            'ability' => fake()->randomElement(['STRENGTH','DEXTERITY']),
             'damage' => fake()->randomElement(['1d8','1d6','1d10']),
             'type' => fake()->randomElement(['Piercing','Slashing','Bludgeoning']),
         ];

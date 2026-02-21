@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('tool_proficiencies')->nullable();
             $table->string('starter_gear');
 
-            $table->enum('spellcaster', ['FULL','HALF', 'SINGLE', 'NONE']);
-            $table->boolean('has_charges');
+            $table->enum('spellcaster', ['FULL','HALF','PACT','NONE']);
+            $table->enum('spell_list', ['SPELLBOOK','FULL','OTHER','NONE']);
         });
     }
 

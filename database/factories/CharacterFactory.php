@@ -28,6 +28,9 @@ class CharacterFactory extends Factory
             'archetype_id' => Archetype::inRandomOrder()->first(),
 
             'name' => fake()->name(),
+
+            'draft' => false,
+
             'level' => fake()->numberBetween(1,20),
             'experience_points' => fake()->numberBetween(0,10000),
             'armor_class' => fake()->numberBetween(11,20),
@@ -40,8 +43,6 @@ class CharacterFactory extends Factory
             'temporary_hit_points' => 0,
 
             'turn_order' => 0,
-
-            'archetype_proficiencies' => fake()->randomElement(["ATHLETICS", "ACROBATICS", "SLEIGHT OF HAND", "STEALTH", "ARCANA", "HISTORY", "INVESTIGATION", "NATURE", "RELIGION", "ANIMAL HANDLING", "INSIGHT", "MEDICINE", "PERCEPTION", "SURVIVAL", "DECEPTION", "INTIMIDATION", "PERFORMANCE", "PERSUASION"]) . ", " . fake()->randomElement(["ATHLETICS", "ACROBATICS", "SLEIGHT OF HAND", "STEALTH", "ARCANA", "HISTORY", "INVESTIGATION", "NATURE", "RELIGION", "ANIMAL HANDLING", "INSIGHT", "MEDICINE", "PERCEPTION", "SURVIVAL", "DECEPTION", "INTIMIDATION", "PERFORMANCE", "PERSUASION"]),
         ];
     }
 }

@@ -22,7 +22,7 @@
                 <x-stat height="short">
                     <x-slot:mod>{{ $stat->mod() }}</x-slot:mod>
                     <x-slot:stat>{{ $stat->score }}</x-slot:stat>
-                    {{ $stat->short() }}
+                    {{ $stat->short }}
                 </x-stat>
             @endforeach
         </div>

@@ -1,12 +1,12 @@
-@props(['character' => null, 'user' => Auth::user(), 'actions' => null])
+@props(['character' => null, 'user' => Auth::user(), 'actions' => null, 'stats'])
 <section class="p-6 flex justify-center overflow-y-auto overflow-x-hidden h-screen flex-1">
     <!-- SIDE BAR -->
     <div class="w-[7rem] h-[7rem] rounded-lg grid grid-cols-1 gap-y-4 mr-4">
-        @foreach ($character->statistics as $statistic)
+        @foreach ($character->statistics as $stat)
             <x-stat>
-                {{ $statistic->short() }}
-                <x-slot:stat>{{ $statistic->score }}</x-slot:stat>
-                <x-slot:mod>{{ $statistic->mod() }}</x-slot:mod>
+                {{ $stat->short }}
+                <x-slot:stat>{{ $stat->score }}</x-slot:stat>
+                <x-slot:mod>{{ $stat->mod() }}</x-slot:mod>
             </x-stat>
         @endforeach
     </div>
@@ -36,11 +36,7 @@
         <div class="flex gap-4 justify-between mb-4">
             <x-attribute-box type="bot">
                 <x-slot:label>INSPIRATION</x-slot:label>
-                @if ($character->inspiration)
-                    <x-boolean-box truth="true"/>
-                @else
-                    <x-boolean-box truth="false"/>
-                @endif
+                    <x-boolean-box>{{ $character->inspiration ?: ""}}</x-boolean-box>
             </x-attribute-box>
             <x-attribute-box type="bot">
                 <x-slot:label>PROFICIENCY BONUS</x-slot:label>
@@ -48,7 +44,7 @@
             </x-attribute-box>
             <x-attribute-box type="bot">
                 <x-slot:label>PASSIVE PERCEPTION</x-slot:label>
-                {{ 10 + $character->skills->where('name', 'PERCEPTION')->first()->modifier }}
+                {{ 10 }}
             </x-attribute-box>
             <x-attribute-box type="bot">
                 <x-slot:label>ARMOR CLASS</x-slot:label>
@@ -74,18 +70,9 @@
                     <h2 class="text-xs text-gray-400 mb-2">SAVING THROWS</h2>
                     @foreach ($character->statistics as $stat)
                         <div class="flex gap-2 mb-1 border-b last:border-none border-gray-100">
-                            @php
-                                if ($stat->proficient) {
-                                    $truth = "true";
-                                    $num = $character->proficiency_bonus;
-                                } else {
-                                    $truth = "false";
-                                    $num = 0;
-                                }
-                            @endphp
-                            <x-boolean-box :truth="$truth"/>
-                            <div class="w-[30px] text-center"><h1>{{ $stat->modify($num) }}</h1></div>
-                            <h1>{{ $stat->ability }}</h1>
+                            <x-boolean-box>{{ $stat->proficient ?: ""}}</x-boolean-box>
+                            <div class="w-[30px] text-center"><h1>{{ $stat->mod() }}</h1></div>
+                            <h1>{{ $stat->name }}</h1>
                         </div>
                     @endforeach
                 </div>
@@ -93,20 +80,11 @@
                 <!-- BOTTOM LEFT -->
                 <div class="bg-white p-4 rounded-xl border border-gray-400 mb-4">
                     <h2 class="text-xs text-gray-400 mb-2">SKILLS</h2>
-                    @foreach ($character->skills as $skill)
+                    @foreach ($character->proficiencies as $prof)
                         <div class="flex gap-2 mb-1 border-b last:border-none border-gray-100">
-                            @php
-                                if ($skill->proficient) {
-                                    $truth = "true";
-                                    $num = $character->proficiency_bonus;
-                                } else {
-                                    $truth = "false";
-                                    $num = 0;
-                                }
-                            @endphp
-                            <x-boolean-box :truth="$truth"/>
-                            <div class="w-[30px] text-center"><h1>{{ $skill->modify($num) }}</h1></div>
-                            <h1>{{ $skill->name }}</h1>
+                            <x-boolean-box>{{ $prof->proficient ?: "" }}</x-boolean-box>
+                            <div class="w-[30px] text-center"><h1>{{ $prof->modsign() }}</h1></div>
+                            <h1>{{ $prof->skill->name }}</h1>
                         </div>
                     @endforeach
                 </div>
@@ -146,7 +124,7 @@
                         @foreach ($actions as $action)
                             <div class="py-1 grid grid-cols-4 border-b last:border-none mb-1 text-center text-lg">
                                 <h1>{{ $action->name }}</h1>
-                                <h1>{{ $character->statistics->where('ability',$action->ability)->first()->modify($character->proficiency_bonus) }}</h1>
+                                <h1>{{ $character->statistics->where('statistic_id',$action->statistic->id)->first()->modify($character->proficiency_bonus) }}</h1>
                                 <h1>{{ $action->damage }} {{ $character->statistics->where('ability', $action->ability)->first()->mod() }}</h1>
                                 <h1>{{ $action->type }}</h1>
                             </div>
@@ -155,18 +133,23 @@
                 </div>
 
                 <!-- OTHER -->
-                @if ($character->archetype->has_charges)
-                    <div class="flex gap-x-4 justify-between mb-4">
-                        @foreach ($character->archetype->charges as $charges)
-                            <x-charges type="{{ $charges->name }}">
-                                {{ $charges->at_level($character->level) }}
-                            </x-charges>
-                        @endforeach
-                    </div>
-                @endif
+                <div class="flex gap-x-4 justify-between mb-4">
+                    @foreach ($character->archetype->charges as $charges)
+                        <x-charges type="{{ $charges->name }}">
+                            {{ $charges->at_level($character->level) }}
+                        </x-charges>
+                    @endforeach
+
+                    @if ($character->archetype->spellcaster == "PACT")
+                        <x-charges type="Spell Slots">
+                            {{ $character->archetype->spellslots->pact_slots($character->level) }}
+                        </x-charges>
+                    @endif
+                </div>
+
 
                 <div class="grid grid-cols-1 gap-y-4">
-                    @if ($character->archetype->spellcaster != "NONE")
+                    @if ($character->archetype->spellcaster != "NONE" && $character->archetype->spellcaster != "PACT")
                         <x-feature-card type="SPELLSLOTS">
                             <div class="grid grid-cols-{{ count($character->archetype->spellslots->levels()) }} justify-between text-center mt-4">
                                 @php

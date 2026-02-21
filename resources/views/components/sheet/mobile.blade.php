@@ -24,7 +24,7 @@
             <div class="grid grid-cols-3 gap-y-4 gap-x-6 mx-auto w-fit">
                 @foreach ($character->statistics as $statistic)
                     <x-stat height="short">
-                        {{ $statistic->short() }}
+                        {{ $statistic->short }}
                         <x-slot:stat>{{ $statistic->score }}</x-slot:stat>
                         <x-slot:mod>{{ $statistic->mod() }}</x-slot:mod>
                     </x-stat>
@@ -54,20 +54,11 @@
 
         <div class="bg-white p-4 rounded-xl border border-2 border-gray-400">
             <h2 class="text-xs text-gray-400 mb-2">SKILLS</h2>
-            @foreach ($character->skills as $skill)
+            @foreach ($character->proficiencies as $prof)
                 <div class="flex gap-2 mb-1 border-b last:border-none border-gray-100">
-                    @php
-                        if ($skill->proficient) {
-                            $truth = "true";
-                            $num = $character->proficiency_bonus;
-                        } else {
-                            $truth = "false";
-                            $num = 0;
-                        }
-                    @endphp
-                    <x-boolean-box :truth="$truth"/>
-                    <div class="w-[30px] text-center"><h1>{{ $skill->modify($num) }}</h1></div>
-                    <h1>{{ $skill->name }}</h1>
+                    <x-boolean-box :truth="$prof->proficient ? 'true' : 'false'"/>
+                    <div class="w-[30px] text-center"><h1>{{ $prof->modsign() }}</h1></div>
+                    <h1>{{ $prof->skill->name }}</h1>
                 </div>
             @endforeach
         </div>

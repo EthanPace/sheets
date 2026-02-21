@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Character;
+use App\Models\Statistic;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,8 +17,9 @@ return new class extends Migration
             $table->id();
             
             $table->foreignIdFor(Character::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Statistic::class)->constrained()->onDelete('cascade');
+
             $table->string('name');
-            $table->enum('ability', ['STRENGTH','DEXTERITY','CONSTITUTION','WISDOM','INTELLIGENCE','CHARISMA']);
             $table->string('damage');
             $table->string('type');
         });

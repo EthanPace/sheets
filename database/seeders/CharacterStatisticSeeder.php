@@ -10,13 +10,13 @@ use Illuminate\Database\Seeder;
 
 class CharacterStatisticSeeder extends Seeder
 {
-    private function make(string $stat, int $score, Character $character) {
+    private function make(Statistic $stat, int $score, Character $character) {
         CharacterStatistic::factory()->create([
             'character_id' => $character->id,
-            'ability' => $stat,
+            'statistic_id' => $stat->id,
             'score' => $score,
             'modifier' => floor(($score - 10) / 2),
-            'proficient' => in_array($stat, $character->archetype->saves()),
+            'proficient' => in_array($stat->name, $character->archetype->throws()),
         ]);
     }
     /**
@@ -26,56 +26,56 @@ class CharacterStatisticSeeder extends Seeder
     {
         //BEN'S CHAR
         $character = Character::where('id', 1)->first();
-        $stat = "STRENGTH";
+        $stat = Statistic::where('name',"Strength")->first();
         $score = 17;
         $this->make($stat, $score, $character);
-        $stat = "DEXTERITY";
+        $stat = Statistic::where('name',"Dexterity")->first();
         $score = 15;
         $this->make($stat, $score, $character);
-        $stat = "CONSTITUTION";
+        $stat = Statistic::where('name',"Constitution")->first();
         $score = 16;
         $this->make($stat, $score, $character);
-        $stat = "WISDOM";
+        $stat = Statistic::where('name',"Wisdom")->first();
         $score = 15;
         $this->make($stat, $score, $character);
-        $stat = "INTELLIGENCE";
+        $stat = Statistic::where('name',"Intelligence")->first();
         $score = 17;
         $this->make($stat, $score, $character);
-        $stat = "CHARISMA";
+        $stat = Statistic::where('name',"Charisma")->first();
         $score = 16;
         $this->make($stat, $score, $character);
         
         //AADYN'S CHAR
         $character = Character::where('id', 2)->first();
-        $stat = "STRENGTH";
+        $stat = Statistic::where('name',"Strength")->first();
         $score = 18;
         $this->make($stat, $score, $character);
-        $stat = "DEXTERITY";
+        $stat = Statistic::where('name',"Dexterity")->first();
         $score = 17;
         $this->make($stat, $score, $character);
-        $stat = "CONSTITUTION";
+        $stat = Statistic::where('name',"Constitution")->first();
         $score = 16;
         $this->make($stat, $score, $character);
-        $stat = "WISDOM";
+        $stat = Statistic::where('name',"Wisdom")->first();
         $score = 12;
         $this->make($stat, $score, $character);
-        $stat = "INTELLIGENCE";
+        $stat = Statistic::where('name',"Intelligence")->first();
         $score = 11;
         $this->make($stat, $score, $character);
-        $stat = "CHARISMA";
+        $stat = Statistic::where('name',"Charisma")->first();
         $score = 9;
         $this->make($stat, $score, $character);
 
         foreach (Character::all() as $character) {
-            foreach (['STRENGTH', 'DEXTERITY', 'CONSTITUTION', 'WISDOM', 'INTELLIGENCE', 'CHARISMA'] as $stat) {
+            foreach (Statistic::all() as $stat) {
                 if (CharacterStatistic::where('character_id', $character->id)->count() < 6) {
                     $score = fake()->numberBetween(9,18);
                     CharacterStatistic::factory()->create([
                         'character_id' => $character->id,
-                        'ability' => $stat,
+                        'statistic_id' => $stat->id,
                         'score' => $score,
                         'modifier' => floor(($score - 10) / 2),
-                        'proficient' => in_array($stat, $character->archetype->saves()),
+                        'proficient' => in_array($stat->name, $character->archetype->saves()),
                     ]);
                 }                
             }

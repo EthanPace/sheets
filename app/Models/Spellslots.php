@@ -19,7 +19,7 @@ class Spellslots extends Model
         switch ($this->archetype->spellcaster) {
             case "NONE":
                 return null;
-            case "SINGLE":
+            case "PACT":
                 return ["SPELL SLOTS"];
             case "HALF":
                 return ["LEVEL 1", "LEVEL 2", "LEVEL 3", "LEVEL 4", "LEVEL 5"];
@@ -71,5 +71,9 @@ class Spellslots extends Model
             case 20:
                 return explode(",", $this->slots_at_level_twenty);
         }
+    }
+
+    public function pact_slots(int $level) : string {
+        return array_sum($this->slots_at_level($level));
     }
 }
