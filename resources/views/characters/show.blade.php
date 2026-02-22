@@ -24,7 +24,6 @@
         @desktop
             <div class="flex gap-x-4">
                 @if ($character->user == $user || $user->role == "runner")
-                    <x-get-button action="/characters/edit/{{ $character->id }}">EDIT</x-get-button>
                     @if (!$user->character || $user->character->id != $character->id)
                         <x-post-button action="/characters/{{ $character->id }}/use">SELECT</x-post-button>
                     @else
