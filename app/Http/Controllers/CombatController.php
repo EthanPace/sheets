@@ -126,6 +126,10 @@ class CombatController extends Controller
             $character->update([
                 'current_hit_points' => 0,
             ]);
+        } else {
+            $character->update([
+                'current_hit_points' => $character->max_hit_points,
+            ]);
         }
 
         return redirect()->back();

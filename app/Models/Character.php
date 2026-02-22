@@ -58,6 +58,10 @@ class Character extends Model
         return $this->hasOne(CharacterSpellslots::class);
     }
 
+    public function skill(String $skill) {
+        return $this->proficiencies->where('skill_id', Skill::where('name', $skill)->first()->id)->first();
+    }
+
     public function slots_per_level(): array {
         $slots = $this->spellslots;
 

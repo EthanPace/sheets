@@ -117,7 +117,7 @@
                 </x-attribute-box>
                 <x-attribute-box type="bot">
                     <x-slot:label>PASSIVE PERCEPTION</x-slot:label>
-                    {{ 10 + $character->skills->where('name', 'PERCEPTION')->first()->modifier }}
+                    {{ 10  + $character->skill('Perception')->mod() }}
                 </x-attribute-box>
                 <x-attribute-box type="bot">
                     <x-slot:label>ARMOR CLASS</x-slot:label>
@@ -146,13 +146,13 @@
         @if ($character->archetype->spellslots)
             <div class="grid grid-cols-1 p-4 bg-white rounded-xl border border-2 border-gray-400">
                 <h2 class="text-xs text-gray-400 mb-2">SPELLSLOTS</h2>
-                <div class="grid grid-cols-{{ count($character->archetype->spellslots->levels()) }} justify-between text-center">
+                <div class="grid grid-cols-3 justify-between text-center">
                     @php
                         $index = 0;
                         $slots = $character->archetype->spellslots->slots_at_level($character->level);
                     @endphp
                     @foreach ($character->archetype->spellslots->levels() as $level)
-                        <div class="w-[60px] m-auto">
+                        <div class="w-[60px] m-auto mb-4">
                             <h1 class="text-sm text-gray-400 border-b border-gray-300">{{ $level }}</h1>
                             <h1 class="text-lg mt-1">{{ $slots[$index] }}</h1>
                         </div>

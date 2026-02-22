@@ -43,37 +43,6 @@ class CharacterController extends Controller
         ]);
     }
 
-    public function edit(Character $character) {
-        $this->authorize('update', $character);
-
-        $user = Auth::user();
-
-        return view('characters.edit', [
-            'user' => $user,
-            'character' => $character,
-        ]);
-    }
-
-    public function update(Character $character) {
-        $this->authorize('update', $character);
-
-        $valid = request()->validate([
-            'name'                  => 'sometimes|string|max:80',
-            'level'                 => 'sometimes|integer|min:1|max:20',
-            'experience_points'     => 'sometimes|integer|min:0',
-            'armor_class'           => 'sometimes|integer|min:0|max:30',
-            'proficiency_bonus'     => 'sometimes|integer|min:0',
-            'inspiration'           => 'sometimes|boolean',
-            'current_hit_points'    => 'sometimes|integer|min:0',
-            'max_hit_points'        => 'sometimes|integer|min:0',
-            'temporary_hit_points'  => 'sometimes|integer|min:0',
-        ]);
-
-        $character->update($valid);
-
-        return redirect('/characters/' . $character->id);
-    }
-
     public function use(Character $character) {
         $user = Auth::user();
         

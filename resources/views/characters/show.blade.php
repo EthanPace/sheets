@@ -5,7 +5,6 @@
         @mobile
             <div class="flex gap-x-4">
                 @if ($character->user == $user || $user->role == "runner")
-                    <x-get-button padding="4" action="/characters/edit/{{ $character->id }}">✎</x-get-button>
                     @if (!$user->character || $user->character->id != $character->id)
                         <x-post-button action="/characters/{{ $character->id }}/use">+</x-post-button>
                     @else

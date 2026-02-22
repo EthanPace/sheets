@@ -15,7 +15,11 @@ class Note extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function short() {
+        return substr($this->title,0,10) . "-";
+    }
+
     public function preview() {
-        return substr($this->text,0,100) . " —";
+        return substr($this->text,0,100) . "-";
     }
 }

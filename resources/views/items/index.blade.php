@@ -68,7 +68,7 @@
             </table>
         </div>
 
-        <div class="grid sm:grid-cols-2 sm:gap-20 justify-between w-full max-w-[95rem] mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:gap-20 justify-between w-full max-w-[95rem] mx-auto">
             <!-- Items -->
             <div>
                 <div class="sm:w-full max-w-[45rem] h-fit bg-white rounded-3xl border border-2 border-orange-500 mb-4">
