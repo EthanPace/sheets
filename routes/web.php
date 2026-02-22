@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/builder/character/{character}', [CharacterBuilderController::class, 'details'])->can('view', 'character');
     Route::post('/builder/character/{character}', [CharacterBuilderController::class, 'update'])->can('update', 'character');
 
+    Route::get('/builder/random', [CharacterBuilderController::class, 'random']);
+
     Route::get('/notes', [NoteController::class, 'index']);
     Route::get('/notes/export', [NoteController::class, 'export']);
     Route::get('/notes/create', [NoteController::class, 'create']);

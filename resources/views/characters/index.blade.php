@@ -3,7 +3,12 @@
         <x-slot:heading>Character Sheets</x-slot:heading>
         <x-slot:subheading>Manage your characters</x-slot:subheading>
 
+        <div class="flex gap-4">
+        @desktop
+            <x-create-button href="/builder/random">Roll</x-create-button>
+        @enddesktop
         <x-create-button href="/builder/character">New</x-create-button>
+        </div>
     </x-header>
 
     <div class="flex flex-col p-4 gap-4 w-full overflow-x-hidden h-screen flex-1 overflow-y-auto">

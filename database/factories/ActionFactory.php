@@ -19,8 +19,8 @@ class ActionFactory extends Factory
     public function definition(): array
     {
         return [
-            'character_id' => Character::inRandomOrder()->first(),
-            'statistic_id' => Statistic::inRandomOrder()->first(),
+            'character_id' => Character::inRandomOrder()->first()->id,
+            'statistic_id' => Statistic::inRandomOrder()->first()->id,
 
             'name' => fake()->randomElement(['Longsword','Javelin','Scimitar','Shortsword','Longbow']),
             'damage' => fake()->randomElement(['1d8','1d6','1d10']),
