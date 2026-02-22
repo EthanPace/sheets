@@ -16,7 +16,7 @@ class CharacterStatisticSeeder extends Seeder
             'statistic_id' => $stat->id,
             'score' => $score,
             'modifier' => floor(($score - 10) / 2),
-            'proficient' => in_array($stat->name, $character->archetype->throws()),
+            'proficient' => in_array($stat->name, $character->archetype->saves()),
         ]);
     }
     /**
