@@ -13,7 +13,7 @@
             <x-form.input field="password_confirmation" title="Confirm New Password" type="password"/>
 
             <x-form.submit-button padding="2"/>
-            <x-form.success scope="reset"/>
         </x-form>
+        <x-form.success scope="reset"/>
     </div>
 </x-layout>
