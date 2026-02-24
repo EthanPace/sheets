@@ -39,7 +39,7 @@
                     <x-form.dropdown field="role" title="ROLE" :options="['admin', 'runner', 'player']"/>
                     <x-form.submit-button title="ADD"/>
                 </x-form>
-                <x-form.success scope="form"/>
+                <x-form.success scope="create"/>
             </x-form.wrapper>
         </div>
     </div>
