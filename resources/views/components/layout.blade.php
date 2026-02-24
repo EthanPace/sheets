@@ -28,36 +28,47 @@
                 @endauth
                 <!-- User Profile -->
                 @auth
-                    <form action="/logout" method="POST">
-                        @csrf
-                        <button class="flex items-center justify-between w-full h-16 sm:h-20 p-4 border-t border-gray-700 hover:bg-gray-600" type="submit">
-                            <div class="w-0 sm:w-fit sm:ml-4 text-start invisible sm:visible">
-                                <p class="text-sm font-medium">{{ strtoupper(Auth::user()->username) }}</p>
-                                <p class="text-xs text-gray-400">{{ strtoupper(Auth::user()->role) }}</p>
-                            </div>
-
-                            <x-icon.leave size="7"/>
-                        </button>
-                    </form>
-                @endauth
-
-                @guest
                     @desktop
-                        <a href="/login" class="sm:p-2 sm:p-4 border-t border-gray-700 hover:bg-gray-600 items-center w-full">
-                            <div class="flex items-center">
-                                <div class="mt-4 sm:mt-0 sm:ml-3">
-                                    <p class="text-sm font-medium invisible sm:visible w-0 h-0 sm:w-fit sm:h-fit">Log in</p>
-                                    <p class="text-xs text-gray-400 invisible sm:visible">to your account</p>
+                        <div class="w-full px-3 mb-4 flex">
+                            <x-nav.link page="profile">
+                                <x-slot:icon><x-icon.gear/></x-slot:icon>
+                                <div class="flex justify-between items-center w-full">
+                                    <h1 class="font-medium">{{ strtoupper(Auth::user()->username) }}</h1>
+                                    <p class="text-gray-300 text-lg">=</p>
+                                    <h3 class="text-gray-400 mr-2">{{ strtoupper(Auth::user()->role) }}</h3>
                                 </div>
-                            </div>
-                        </a>
-                    @elsedesktop
-                        <div class="sm:invisible sm:w-0 sm:h-0 w-full pl-2 pr-3 mt-4">
-                            <x-nav.link page="login">
-                                <x-slot:icon><x-icon.character/></x-slot:icon>
                             </x-nav.link>
                         </div>
                     @enddesktop
+
+                    @mobile
+                        <div class="sm:invisible sm:w-0 sm:h-0 w-full pl-2 pr-2 mb-4">
+                            <x-nav.link page="profile">
+                                <x-slot:icon><x-icon.gear size="6"/></x-slot:icon>
+                            </x-nav.link>
+                        </div>
+                    @endmobile
+                @endauth
+
+                @guest
+                    <div class="flex flex-col justify-end w-full h-full mb-4">
+                        @desktop
+                            <div class="w-full px-3">
+                                <x-nav.link page="login">
+                                    <x-slot:icon><x-icon.character/></x-slot:icon>
+                                    LOG IN
+                                </x-nav.link>
+                            </div>
+                        @enddesktop
+
+                        @mobile
+                            <div class="sm:invisible sm:w-0 sm:h-0 w-full pl-2 pr-3 mt-4">
+                                <x-nav.link page="login">
+                                    <x-slot:icon><x-icon.character/></x-slot:icon>
+                                </x-nav.link>
+                            </div>
+                        @endmobile
+                    </div>
                 @endguest
             </aside>
 

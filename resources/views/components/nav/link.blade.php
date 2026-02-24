@@ -1,7 +1,7 @@
 @props(['page' => 'dashboard'])
 
 @php
-    $classes = "flex items-center px-2 sm:px-4 py-2 rounded-md";
+    $classes = "flex items-center px-2 sm:px-4 py-2 rounded-md w-full";
 
     if (request()->is(explode("?", $page)[0])) {
         $classes .= " text-gray-100 bg-gray-700 hover:bg-gray-600";
@@ -12,5 +12,5 @@
 
 <a href="/{{ $page }}" class="{{ $classes }}" {{ $attributes }} draggable=false>
     {{ $icon ?: '' }}
-    <h1 class="invisible sm:visible ml-4">{{ $slot }}</h1>
+    <h1 class="invisible sm:visible ml-4 sm:w-full">{{ $slot }}</h1>
 </a>

@@ -1,5 +1,5 @@
 @props(['width' => "full"])
-<a {{ $attributes }} class="bg-white sm:h-fit w-{{ $width }} p-6 border border-2 border-gray-300 rounded-3xl shadow-md hover:shadow-lg transition-shadow duration-300" draggable="false">
+<a {{ $attributes }} class="bg-white h-fit w-{{ $width }} p-6 border border-2 border-gray-300 rounded-3xl shadow-md hover:shadow-lg transition-shadow duration-300" draggable="false">
     <div class="flex justify-between items-center">
         {{ $header }}
     </div>

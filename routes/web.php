@@ -65,6 +65,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/initiative/{initiative}', [CombatController::class, 'destroy']);
 
     Route::get('/profile', [UserController::class, 'show']);
+    Route::get('/profile/password', [UserController::class, 'edit']);
+    Route::post('/profile/password', [UserController::class, 'update']);
+
     Route::get('/users', [UserController::class, 'index'])->middleware('admin');
 });
 
