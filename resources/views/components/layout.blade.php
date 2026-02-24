@@ -34,7 +34,6 @@
                                 <x-slot:icon><x-icon.gear/></x-slot:icon>
                                 <div class="flex justify-between items-center w-full">
                                     <h1 class="font-medium">{{ strtoupper(Auth::user()->username) }}</h1>
-                                    <p class="text-gray-300 text-lg">=</p>
                                     <h3 class="text-gray-400 mr-2">{{ strtoupper(Auth::user()->role) }}</h3>
                                 </div>
                             </x-nav.link>

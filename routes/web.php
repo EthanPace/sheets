@@ -69,6 +69,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/password', [UserController::class, 'update']);
 
     Route::get('/users', [UserController::class, 'index'])->middleware('admin');
+    Route::get('/users/create', [UserController::class, 'create'])->middleware('admin');
+    Route::post('/users/create', [UserController::class, 'store'])->middleware('admin');
+    Route::post('/users/{user}/password-reset', [UserController::class, 'password_reset'])->middleware('admin');
 });
 
 Route::get('/nope', function() { return view('auth.dead'); });

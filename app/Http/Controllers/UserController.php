@@ -23,6 +23,27 @@ class UserController extends Controller
         return view('users.profile');
     }
 
+    public function create() {
+        return view('users.create');
+    }
+
+    public function store(Request $request) {
+        $valid = $request->validate([
+            'username' => 'required',
+            'role' => 'required|in:admin,runner,player',
+        ]);
+
+        $randomPassword = strtoupper(fake()->word() . fake()->word() . fake()->word());
+
+        User::create([
+            'username' => $valid['username'],
+            'role' => $valid['role'],
+            'password' => $randomPassword,
+        ]);
+
+        return redirect()->back()->with('success', 'Success: ' . $randomPassword)->with('scope', 'form');
+    }
+
     public function edit() {
         return view('users.password');
     }
@@ -37,6 +58,14 @@ class UserController extends Controller
 
         $user->update(['password' => $valid['password']]);
 
-        return redirect()->back()->with('success', 'Password updated!');
+        return redirect( '/users/profile/');
+    }
+
+    public function password_reset(User $user) {
+        $randomPassword = strtoupper(fake()->word() . fake()->word() . fake()->word());
+
+        $user->update(['password' => $randomPassword]);
+
+        return redirect()->back()->with('success', 'Success: ' . $randomPassword)->with('scope', 'post-reset');
     }
 }
