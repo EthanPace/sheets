@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -66,6 +65,6 @@ class UserController extends Controller
 
         $user->update(['password' => $randomPassword]);
 
-        return redirect()->back()->with('success', 'Success: ' . $randomPassword)->with('scope', 'post-reset');
+        return redirect('/');
     }
 }
