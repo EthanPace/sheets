@@ -57,7 +57,7 @@ class UserController extends Controller
 
         $user->update(['password' => $valid['password']]);
 
-        return redirect( '/users/profile/')->with('success', 'password updated')->with('scope', 'reset');
+        return redirect()->back()->with('success', 'password updated')->with('scope', 'reset');
     }
 
     public function password_reset(User $user) {
@@ -65,6 +65,6 @@ class UserController extends Controller
 
         $user->update(['password' => $randomPassword]);
 
-        return redirect('/');
+        return redirect()->back()->with('success', 'Success: ' . $randomPassword)->with('scope', 'post-reset');
     }
 }
