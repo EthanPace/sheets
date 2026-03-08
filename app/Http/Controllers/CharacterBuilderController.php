@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Stat;
 use App\Models\Action;
 use App\Models\Archetype;
 use App\Models\Armor;
@@ -63,9 +64,9 @@ class CharacterBuilderController extends Controller
         $saves      = $archetype->saves();
         $statistics = Statistic::all()->keyBy('name');
 
-        foreach (['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'] as $stat) {
-            $name = ucfirst($stat);
-            $score = $valid[$stat];
+        foreach (Stat::cases() as $stat) {
+            $name = $stat->name;
+            $score = $valid[$stat->value];
             $character->statistics()->create([
                 'statistic_id' => $statistics[$name]->id,
                 'score'        => $score,
@@ -154,11 +155,11 @@ class CharacterBuilderController extends Controller
             'user_id' => Auth::id(),
         ]);
         // stats
-        foreach (['Strength', 'Dexterity', 'Constitution', 'Intelligence', 'Wisdom', 'Charisma'] as $stat) {
+        foreach (Stat::cases() as $stat) {
             $score = fake()->numberBetween(8,18);
             CharacterStatistic::factory()->create([
                 'character_id' => $character->id,
-                'statistic_id' => Statistic::where('name', $stat)->first()->id,
+                'statistic_id' => Statistic::where('name', $stat->name)->first()->id,
                 'score'        => $score,
                 'modifier'     => (int) floor(($score - 10) / 2),
                 'proficient'   => fake()->boolean(),
