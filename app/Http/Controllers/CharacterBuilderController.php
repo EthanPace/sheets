@@ -33,16 +33,16 @@ class CharacterBuilderController extends Controller
 
     public function store() {
         $valid = request()->validate([
-            'name'         => 'required|string|max:80',
+            'name'         => ['required', 'string', 'max:80'],
             'species'      => ['required', 'string', Rule::exists('species', 'name')],
             'archetype'    => ['required', 'string', Rule::exists('archetypes', 'name')],
             'background'   => ['required', 'string', Rule::exists('backgrounds', 'name')],
-            'strength'     => 'required|integer|min:1|max:20',
-            'dexterity'    => 'required|integer|min:1|max:20',
-            'constitution' => 'required|integer|min:1|max:20',
-            'intelligence' => 'required|integer|min:1|max:20',
-            'wisdom'       => 'required|integer|min:1|max:20',
-            'charisma'     => 'required|integer|min:1|max:20',
+            'strength'     => ['required', 'integer', 'min:1', 'max:20'],
+            'dexterity'    => ['required', 'integer', 'min:1', 'max:20'],
+            'constitution' => ['required', 'integer', 'min:1', 'max:20'],
+            'intelligence' => ['required', 'integer', 'min:1', 'max:20'],
+            'wisdom'       => ['required', 'integer', 'min:1', 'max:20'],
+            'charisma'     => ['required', 'integer', 'min:1', 'max:20'],
         ]);
 
         $archetype  = Archetype::where('name', $valid['archetype'])->first();
@@ -117,7 +117,7 @@ class CharacterBuilderController extends Controller
 
     public function update(Character $character) {
         $valid = request()->validate([
-            'skills'   => 'nullable|array',
+            'skills'   => ['nullable', 'array'],
             'skills.*' => ['required', 'string', Rule::exists('skills', 'name')],
         ]);
 

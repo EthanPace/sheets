@@ -26,7 +26,7 @@ class CombatController extends Controller
         $user = Auth::user();
 
         $valid = request()->validate([
-            'num' => 'bail|integer|max:255'
+            'num' => ['bail', 'integer', 'max:255'],
         ]);
 
         if ($valid['num'] && $user->character) {
@@ -63,9 +63,9 @@ class CombatController extends Controller
 
     public function store() {
         $valid = request()->validate([
-            'name' => 'bail|string|max:30',
-            'turn_order' => 'integer|max:255',
-            'current_hit_points' => 'integer|max:750',
+            'name' => ['bail', 'string', 'max:30'],
+            'turn_order' => ['integer', 'max:255'],
+            'current_hit_points' => ['integer', 'max:750'],
         ]);
 
         Initiative::create($valid);
@@ -75,7 +75,7 @@ class CombatController extends Controller
 
     public function update(Initiative $initiative) {
         $valid = request()->validate([
-            'current_hit_points' => 'integer|max:750',
+            'current_hit_points' => ['integer', 'max:750'],
         ]);
 
         $initiative->update($valid);
@@ -91,7 +91,7 @@ class CombatController extends Controller
 
     public function heal(Character $character) {
         $valid = request()->validate([
-            'health' => "integer|max:255",
+            'health' => ['integer', 'max:255'],
         ]);
 
         $health = $character->current_hit_points + $valid['health'];
@@ -111,7 +111,7 @@ class CombatController extends Controller
 
     public function health(Character $character) {
         $valid = request()->validate([
-            'health' => "integer|max:255",
+            'health' => ['integer', 'max:255'],
         ]);
 
         if ($valid['health'] < $character->max_hit_points && $valid['health'] >= 0) {
@@ -137,7 +137,7 @@ class CombatController extends Controller
 
     public function damage(Character $character) {
         $valid = request()->validate([
-            'damage' => "integer|max:255",
+            'damage' => ['integer', 'max:255'],
         ]);
 
         $damage = $character->current_hit_points - $valid['damage'];

@@ -29,7 +29,7 @@ class UserController extends Controller
     public function store(Request $request) {
         $valid = $request->validate([
             'username' => 'required',
-            'role' => 'required|in:admin,runner,player',
+            'role' => ['required', 'in:admin,runner,player'],
         ]);
 
         $randomPassword = strtoupper(fake()->word() . fake()->word() . fake()->word());
@@ -51,8 +51,8 @@ class UserController extends Controller
         $user = Auth::user();
 
         $valid = $request->validate([
-            'current_password' => 'required|current_password',
-            'password' => 'required|confirmed|min:6',
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'confirmed', 'min:6'],
         ]);
 
         $user->update(['password' => $valid['password']]);
