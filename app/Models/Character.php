@@ -59,7 +59,7 @@ class Character extends Model
     }
 
     public function skill(String $skill) {
-        return $this->proficiencies->where('skill_id', Skill::where('name', $skill)->first()->id)->first();
+        return $this->proficiencies->firstWhere('skill_id', Skill::firstWhere('name', $skill)->id);
     }
 
     public function slots_per_level(): array {

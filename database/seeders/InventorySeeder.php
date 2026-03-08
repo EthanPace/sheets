@@ -18,7 +18,7 @@ class InventorySeeder extends Seeder
      */
     public function run(): void
     {
-        $klu = Character::where('id', '1')->first();
+        $klu = Character::firstWhere('id', '1');
         Inventory::factory()->create([
             'character_id' => $klu->id,
             'equippable_id' => Armor::where('name', 'Chain Mail')->first()->id,
@@ -34,7 +34,7 @@ class InventorySeeder extends Seeder
             'equippable_id' => Weapon::where('name', 'Longsword')->first()->id,
             'equippable_type' => Weapon::class,
         ]);
-        $javelin = Weapon::where('name', 'Javelin')->first();
+        $javelin = Weapon::firstWhere('name', 'Javelin');
         for ($i = 0; $i < 6; $i++) {
             Inventory::factory()->create([
                 'character_id' => $klu->id,
@@ -44,7 +44,7 @@ class InventorySeeder extends Seeder
         }
         Inventory::factory()->create([
             'character_id' => $klu->id,
-            'equippable_id' => Tools::where('name', 'Gaming Set')->first()->id,
+            'equippable_id' => Tools::firstWhere('name', 'Gaming Set')->id,
             'equippable_type' => Tools::class,
         ]);
         $items1 = ['Amulet', "Priest's Pack", 'Clothes, Fine', 'Perfume'];
@@ -56,8 +56,8 @@ class InventorySeeder extends Seeder
             ]);
         }
 
-        $vonik = Character::where('id', '2')->first();
-        $dagger = Weapon::where('name', 'Dagger')->first();
+        $vonik = Character::firstWhere('id', '2');
+        $dagger = Weapon::firstWhere('name', 'Dagger');
         for ($i = 0; $i < 2; $i++) {
             Inventory::factory()->create([
                 'character_id' => $vonik->id,
@@ -69,20 +69,20 @@ class InventorySeeder extends Seeder
         foreach ($weapons2 as $weaponName) {
             Inventory::factory()->create([
                 'character_id' => $vonik->id,
-                'equippable_id' => Weapon::where('name', $weaponName)->first()->id,
+                'equippable_id' => Weapon::firstWhere('name', $weaponName)->id,
                 'equippable_type' => Weapon::class,
             ]);
         }
         Inventory::factory()->create([
             'character_id' => $vonik->id,
-            'equippable_id' => Armor::where('name', 'Studded Leather Armor')->first()->id,
+            'equippable_id' => Armor::firstWhere('name', 'Studded Leather Armor')->id,
             'equippable_type' => Armor::class,
         ]);
         $tools2 = ["Thieves' Tools"];
         foreach ($tools2 as $toolName) {
             Inventory::factory()->create([
                 'character_id' => $vonik->id,
-                'equippable_id' => Tools::where('name', $toolName)->first()->id,
+                'equippable_id' => Tools::firstWhere('name', $toolName)->id,
                 'equippable_type' => Tools::class,
             ]);
         }
@@ -90,11 +90,11 @@ class InventorySeeder extends Seeder
         foreach ($items2 as $itemName) {
             Inventory::factory()->create([
                 'character_id' => $vonik->id,
-                'equippable_id' => Item::where('name', $itemName)->first()->id,
+                'equippable_id' => Item::firstWhere('name', $itemName)->id,
                 'equippable_type' => Item::class,
             ]);
         }
-        $pouch = Item::where('name', 'Pouch')->first();
+        $pouch = Item::firstWhere('name', 'Pouch');
         for ($i = 0; $i < 2; $i++) {
             Inventory::factory()->create([
                 'character_id' => $vonik->id,
@@ -102,7 +102,7 @@ class InventorySeeder extends Seeder
                 'equippable_type' => Item::class,
             ]);
         }
-        $arrow = Item::where('name', 'Arrows')->first();
+        $arrow = Item::firstWhere('name', 'Arrows');
         Inventory::factory()->create([
             'character_id' => $vonik->id,
             'equippable_id' => $arrow->id,

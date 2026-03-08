@@ -17,7 +17,7 @@ class SpeciesFeatureSeeder extends Seeder
         //
         // Dragonborn
         //
-        $dragonborn = Species::where('name', "Dragonborn")->first();
+        $dragonborn = Species::firstWhere('name', "Dragonborn");
         SpeciesFeature::factory()->create([
             'species_id' => $dragonborn->id,
             'name' => "Draconic Ancestry",
@@ -47,7 +47,7 @@ class SpeciesFeatureSeeder extends Seeder
         //
         // Dwarf
         //
-        $dwarf = Species::where('name', "Dwarf")->first();
+        $dwarf = Species::firstWhere('name', "Dwarf");
         SpeciesFeature::factory()->create([
             'species_id' => $dwarf->id,
             'name' => "Darkvision",
@@ -72,7 +72,7 @@ class SpeciesFeatureSeeder extends Seeder
         //
         // Elf
         //
-        $elf = Species::where('name', "Elf")->first();
+        $elf = Species::firstWhere('name', "Elf");
         SpeciesFeature::factory()->create([
             'species_id' => $elf->id,
             'name' => "Darkvision",
@@ -102,7 +102,7 @@ class SpeciesFeatureSeeder extends Seeder
         //
         // Gnome
         //
-        $gnome = Species::where('name', "Gnome")->first();
+        $gnome = Species::firstWhere('name', "Gnome");
         SpeciesFeature::factory()->create([
             'species_id' => $gnome->id,
             'name' => "Darkvision",
@@ -122,7 +122,7 @@ class SpeciesFeatureSeeder extends Seeder
         //
         // Goliath
         //
-        $goliath = Species::where('name', "Goliath")->first();
+        $goliath = Species::firstWhere('name', "Goliath");
         SpeciesFeature::factory()->create([
             'species_id' => $goliath->id,
             'name' => "Giant Ancestry",
@@ -142,7 +142,7 @@ class SpeciesFeatureSeeder extends Seeder
         //
         // Halfling
         //
-        $halfling = Species::where('name', "Halfling")->first();
+        $halfling = Species::firstWhere('name', "Halfling");
         SpeciesFeature::factory()->create([
             'species_id' => $halfling->id,
             'name' => "Brave",
@@ -167,7 +167,7 @@ class SpeciesFeatureSeeder extends Seeder
         //
         // Human
         //
-        $human = Species::where('name', "Human")->first();
+        $human = Species::firstWhere('name', "Human");
         SpeciesFeature::factory()->create([
             'species_id' => $human->id,
             'name' => "Resourceful",
@@ -187,7 +187,7 @@ class SpeciesFeatureSeeder extends Seeder
         //
         // Orc
         //
-        $orc = Species::where('name', "Orc")->first();
+        $orc = Species::firstWhere('name', "Orc");
         SpeciesFeature::factory()->create([
             'species_id' => $orc->id,
             'name' => "Adrenaline Rush",
@@ -207,7 +207,7 @@ class SpeciesFeatureSeeder extends Seeder
         //
         // Tiefling
         //
-        $tiefling = Species::where('name', "Tiefling")->first();
+        $tiefling = Species::firstWhere('name', "Tiefling");
         SpeciesFeature::factory()->create([
             'species_id' => $tiefling->id,
             'name' => "Darkvision",
@@ -227,7 +227,7 @@ class SpeciesFeatureSeeder extends Seeder
         //
         // Triton
         //
-        $triton = Species::where('name', "Triton")->first();
+        $triton = Species::firstWhere('name', "Triton");
         SpeciesFeature::factory()->create([
             'species_id' => $triton->id,
             'name' => "Amphibious",
@@ -259,7 +259,7 @@ Intelligence, Wisdom, or Charisma is your spellcasting ability for these spells 
         //
         // Harengon
         //
-        $harengon = Species::where('name', "Harengon")->first();
+        $harengon = Species::firstWhere('name', "Harengon");
         SpeciesFeature::factory()->create([
             'species_id' => $harengon->id,
             'name' => "Hare-Trigger",

@@ -17,7 +17,7 @@ class ArchetypeFeatureSeeder extends Seeder
         //
         // Paladin
         //
-        $paladin = Archetype::where('name', "Paladin")->first();
+        $paladin = Archetype::firstWhere('name', "Paladin");
         ArchetypeFeature::factory()->create([
             'archetype_id' => $paladin->id,
             'level' => 1,
@@ -140,7 +140,7 @@ If another Paladin is present, a creature can benefit from only one Aura of Prot
         //
         // Fighter
         //
-        $fighter = Archetype::where('name', "Fighter")->first();
+        $fighter = Archetype::firstWhere('name', "Fighter");
         ArchetypeFeature::factory()->create([
             'archetype_id' => $fighter->id,
             'level' => 1,
@@ -234,7 +234,7 @@ If another Paladin is present, a creature can benefit from only one Aura of Prot
         //
         // Barbarian
         //
-        $barbarian = Archetype::where('name', "Barbarian")->first();
+        $barbarian = Archetype::firstWhere('name', "Barbarian");
         ArchetypeFeature::factory()->create([
             'archetype_id' => $barbarian->id,
             'level' => 1,
@@ -389,7 +389,7 @@ If another Paladin is present, a creature can benefit from only one Aura of Prot
         //
         // Bard
         //
-        $bard = Archetype::where('name', "Bard")->first();
+        $bard = Archetype::firstWhere('name', "Bard");
         ArchetypeFeature::factory()->create([
             'archetype_id' => $bard->id,
             'level' => 1,
@@ -505,7 +505,7 @@ If another Paladin is present, a creature can benefit from only one Aura of Prot
         //
         // Cleric
         //
-        $cleric = Archetype::where('name', "Cleric")->first();
+        $cleric = Archetype::firstWhere('name', "Cleric");
         ArchetypeFeature::factory()->create([
             'archetype_id' => $cleric->id,
             'level' => 1,
@@ -617,7 +617,7 @@ If another Paladin is present, a creature can benefit from only one Aura of Prot
         //
         // Druid
         //
-        $druid = Archetype::where('name', "Druid")->first();
+        $druid = Archetype::firstWhere('name', "Druid");
         ArchetypeFeature::factory()->create([
         'archetype_id' => $druid->id,
         'level' => 1,
@@ -755,7 +755,7 @@ If another Paladin is present, a creature can benefit from only one Aura of Prot
         //
         // Monk
         //
-        $monk = Archetype::where('name', "Monk")->first();
+        $monk = Archetype::firstWhere('name', "Monk");
         ArchetypeFeature::factory()->create([
         'archetype_id' => $monk->id,
         'level' => 1,
@@ -930,7 +930,7 @@ If another Paladin is present, a creature can benefit from only one Aura of Prot
         //
         // Ranger
         //
-        $ranger = Archetype::where('name', "Ranger")->first();
+        $ranger = Archetype::firstWhere('name', "Ranger");
         ArchetypeFeature::factory()->create([
         'archetype_id' => $ranger->id,
         'level' => 1,
@@ -1066,7 +1066,7 @@ If another Paladin is present, a creature can benefit from only one Aura of Prot
         //
         // Rogue
         //
-        $rogue = Archetype::where('name', "Rogue")->first();
+        $rogue = Archetype::firstWhere('name', "Rogue");
         ArchetypeFeature::factory()->create([
         'archetype_id' => $rogue->id,
         'level' => 1,
@@ -1204,7 +1204,7 @@ If another Paladin is present, a creature can benefit from only one Aura of Prot
         //
         // Warlock
         //
-        $warlock = Archetype::where('name', "Warlock")->first();
+        $warlock = Archetype::firstWhere('name', "Warlock");
         ArchetypeFeature::factory()->create([
         'archetype_id' => $warlock->id,
         'level' => 1,
@@ -1298,7 +1298,7 @@ If another Paladin is present, a creature can benefit from only one Aura of Prot
         //
         // Wizard
         //
-        $wizard = Archetype::where('name', "Wizard")->first();
+        $wizard = Archetype::firstWhere('name', "Wizard");
         ArchetypeFeature::factory()->create([
         'archetype_id' => $wizard->id,
         'level' => 1,

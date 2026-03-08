@@ -14,7 +14,7 @@ class NoteSeeder extends Seeder
      */
     public function run(): void
     {
-$user = User::where('username', "aadyn")->first();
+$user = User::firstWhere('username', "aadyn");
 Note::factory()->create([
     'user_id' => $user->id,
     'theme' => "cyan",
@@ -28,7 +28,7 @@ glowy jade
 5 SP",
 ]);
 
-$user = User::where('username', "ben")->first();
+$user = User::firstWhere('username', "ben");
 Note::factory()->create([
     'user_id' => $user->id,
     'theme' => "indigo",
@@ -68,7 +68,7 @@ Wrathful Smite — Your weapon strike inflicts psychic damage and can frighten e
 Note: As a 2nd level Paladin, you can prepare 3 spells from this list and have 2 spell slots to cast them.",
 ]);
 
-$user = User::where('username', "ben")->first();
+$user = User::firstWhere('username', "ben");
 Note::factory()->create([
     'user_id' => $user->id,
     'theme' => "gray",
@@ -80,7 +80,7 @@ Gaming Set, Fine Clothes, Perfume
 38 GP",
 ]);
 
-$user = User::where('username', "aadyn")->first();
+$user = User::firstWhere('username', "aadyn");
 Note::factory()->create([
     'user_id' => $user->id,
     'theme' => "indigo",
@@ -114,7 +114,7 @@ Note::factory()->create([
 =============================",
 ]);
 
-$user = User::where('username', "ben")->first();
+$user = User::firstWhere('username', "ben");
 Note::factory()->create([
     'user_id' => $user->id,
     'theme' => "indigo",
@@ -129,7 +129,7 @@ Bronze short sword
 Pouch of Electrum coins - 3",
 ]);
 
-$user = User::where('username', "aadyn")->first();
+$user = User::firstWhere('username', "aadyn");
 Note::factory()->create([
     'user_id' => $user->id,
     'theme' => "yellow",
@@ -139,7 +139,7 @@ Note::factory()->create([
 fighting style - Two Weapon Fighting",
 ]);
 
-$user = User::where('username', "ben")->first();
+$user = User::firstWhere('username', "ben");
 Note::factory()->create([
     'user_id' => $user->id,
     'theme' => "gray",

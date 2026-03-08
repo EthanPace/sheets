@@ -30,7 +30,7 @@ class ProficiencySeeder extends Seeder
      */
     public function run(): void
     {
-        $character = Character::where('name', "Kluiekkeer")->first();
+        $character = Character::firstWhere('name', "Kluiekkeer");
         foreach (Skill::all() as $skill) {
             Proficiency::factory()->create([
                 'character_id' => $character->id,
@@ -39,7 +39,7 @@ class ProficiencySeeder extends Seeder
             ]);
         }
 
-        $character = Character::where('name', "Vonik")->first();
+        $character = Character::firstWhere('name', "Vonik");
         foreach (Skill::all() as $skill) {
             Proficiency::factory()->create([
                 'character_id' => $character->id,

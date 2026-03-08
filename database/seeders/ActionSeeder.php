@@ -37,9 +37,9 @@ class ActionSeeder extends Seeder
     public function str_or_dex(mixed $weapon, Character $character) : Statistic {
         $properties = explode(', ', $weapon->properties);
         if (in_array('Finesse',$properties) && $character->stat("Strength") <= $character->stat("Dexterity")) {
-            return Statistic::where('name', "Dexterity")->first();
+            return Statistic::firstWhere('name', "Dexterity");
         } else {
-            return Statistic::where('name', "Strength")->first();
+            return Statistic::firstWhere('name', "Strength");
         }
     }
 }

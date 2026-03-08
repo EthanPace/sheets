@@ -45,9 +45,9 @@ class CharacterBuilderController extends Controller
             'charisma'     => ['required', 'integer', 'min:1', 'max:20'],
         ]);
 
-        $archetype  = Archetype::where('name', $valid['archetype'])->first();
-        $species    = Species::where('name', $valid['species'])->first();
-        $background = Background::where('name', $valid['background'])->first();
+        $archetype  = Archetype::firstWhere('name', $valid['archetype']);
+        $species    = Species::firstWhere('name', $valid['species']);
+        $background = Background::firstWhere('name', $valid['background']);
 
         $character = Character::create([
             'user_id'                 => Auth::id(),
@@ -209,7 +209,7 @@ class CharacterBuilderController extends Controller
         $selection = $options[0];
         // find which ones are items, armors, or weapons and add to inventory
         foreach (explode(', ', $selection) as $gear) {
-            $item = Item::where('name', $gear)->first();
+            $item = Item::firstWhere('name', $gear);
             if ($item) {
                 Inventory::factory()->create([
                     'character_id' => $character->id,
@@ -218,7 +218,7 @@ class CharacterBuilderController extends Controller
                 ]);
                 continue;
             }
-            $armor = Armor::where('name', $gear)->first();
+            $armor = Armor::firstWhere('name', $gear);
             if ($armor) {
                 Inventory::factory()->create([
                     'character_id' => $character->id,
@@ -227,7 +227,7 @@ class CharacterBuilderController extends Controller
                 ]);
                 continue;
             }
-            $weapon = Weapon::where('name', $gear)->first();
+            $weapon = Weapon::firstWhere('name', $gear);
             if ($weapon) {
                 Inventory::factory()->create([
                     'character_id' => $character->id,
@@ -239,7 +239,7 @@ class CharacterBuilderController extends Controller
         }
         // background only has one option, but still need to find the right types
         foreach (explode(', ', $character->background->equipment) as $gear) {
-            $item = Item::where('name', $gear)->first();
+            $item = Item::firstWhere('name', $gear);
             if ($item) {
                 Inventory::factory()->create([
                     'character_id' => $character->id,
@@ -248,7 +248,7 @@ class CharacterBuilderController extends Controller
                 ]);
                 continue;
             }
-            $armor = Armor::where('name', $gear)->first();
+            $armor = Armor::firstWhere('name', $gear);
             if ($armor) {
                 Inventory::factory()->create([
                     'character_id' => $character->id,
@@ -257,7 +257,7 @@ class CharacterBuilderController extends Controller
                 ]);
                 continue;
             }
-            $weapon = Weapon::where('name', $gear)->first();
+            $weapon = Weapon::firstWhere('name', $gear);
             if ($weapon) {
                 Inventory::factory()->create([
                     'character_id' => $character->id,
@@ -280,7 +280,7 @@ class CharacterBuilderController extends Controller
                 : 'Strength';
             Action::factory()->create([
                 'character_id' => $character->id,
-                'statistic_id' => Statistic::where('name', $statName)->first()->id,
+                'statistic_id' => Statistic::firstWhere('name', $statName)->id,
                 'name' => $weaponModel->name,
                 'damage' => $weaponModel->damage_die_number . 'd' . $weaponModel->damage_die,
                 'type' => $weaponModel->damage_type,

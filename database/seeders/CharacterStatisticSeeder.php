@@ -25,44 +25,44 @@ class CharacterStatisticSeeder extends Seeder
     public function run(): void
     {
         //BEN'S CHAR
-        $character = Character::where('id', 1)->first();
-        $stat = Statistic::where('name',"Strength")->first();
+        $character = Character::firstWhere('id', 1);
+        $stat = Statistic::firstWhere('name',"Strength");
         $score = 17;
         $this->make($stat, $score, $character);
-        $stat = Statistic::where('name',"Dexterity")->first();
+        $stat = Statistic::firstWhere('name',"Dexterity");
         $score = 15;
         $this->make($stat, $score, $character);
-        $stat = Statistic::where('name',"Constitution")->first();
+        $stat = Statistic::firstWhere('name',"Constitution");
         $score = 16;
         $this->make($stat, $score, $character);
-        $stat = Statistic::where('name',"Wisdom")->first();
+        $stat = Statistic::firstWhere('name',"Wisdom");
         $score = 15;
         $this->make($stat, $score, $character);
-        $stat = Statistic::where('name',"Intelligence")->first();
+        $stat = Statistic::firstWhere('name',"Intelligence");
         $score = 17;
         $this->make($stat, $score, $character);
-        $stat = Statistic::where('name',"Charisma")->first();
+        $stat = Statistic::firstWhere('name',"Charisma");
         $score = 16;
         $this->make($stat, $score, $character);
         
         //AADYN'S CHAR
-        $character = Character::where('id', 2)->first();
-        $stat = Statistic::where('name',"Strength")->first();
+        $character = Character::firstWhere('id', 2);
+        $stat = Statistic::firstWhere('name',"Strength");
         $score = 18;
         $this->make($stat, $score, $character);
-        $stat = Statistic::where('name',"Dexterity")->first();
+        $stat = Statistic::firstWhere('name',"Dexterity");
         $score = 17;
         $this->make($stat, $score, $character);
-        $stat = Statistic::where('name',"Constitution")->first();
+        $stat = Statistic::firstWhere('name',"Constitution");
         $score = 16;
         $this->make($stat, $score, $character);
-        $stat = Statistic::where('name',"Wisdom")->first();
+        $stat = Statistic::firstWhere('name',"Wisdom");
         $score = 12;
         $this->make($stat, $score, $character);
-        $stat = Statistic::where('name',"Intelligence")->first();
+        $stat = Statistic::firstWhere('name',"Intelligence");
         $score = 11;
         $this->make($stat, $score, $character);
-        $stat = Statistic::where('name',"Charisma")->first();
+        $stat = Statistic::firstWhere('name',"Charisma");
         $score = 9;
         $this->make($stat, $score, $character);
 
