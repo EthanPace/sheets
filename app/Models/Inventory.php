@@ -11,6 +11,12 @@ class Inventory extends Model
     use HasFactory;
     public $timestamps = false;
 
+    public $fillable = [
+        'character_id',
+        'equippable_id',
+        'equippable_type',
+    ];
+
     public function character() {
         return $this->belongsTo(Character::class);
     }

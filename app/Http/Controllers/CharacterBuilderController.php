@@ -150,27 +150,48 @@ class CharacterBuilderController extends Controller
     }
 
     public function random() {
+        $user = Auth::user();
         // character
-        $character = Character::factory()->create([
-            'user_id' => Auth::id(),
+        $character = Character::create([
+            'user_id' => $user->id,
+            'name' => $user->username,
+
+            'draft' => true,
+
+            'species_id' => Species::inRandomOrder()->first()->id,
+            'background_id' => Background::inRandomOrder()->first()->id,
+            'archetype_id' => Species::inRandomOrder()->first()->id,
+
+            'level' => rand(1,20),
+            'experience_points' => rand(0,1000),
+            'armor_class' => rand(11,20),
+            'initiative' => 0,
+            'inspiration' => 'false',
+            'proficiency_bonus' => rand(1,5),
+
+            'current_hit_points' => rand(6,66),
+            'max_hit_points' => rand(12,120),
+            'temporary_hit_points' => 0,
+
+            'turn_order' => 0,
         ]);
         // stats
         foreach (Stat::cases() as $stat) {
-            $score = fake()->numberBetween(8,18);
-            CharacterStatistic::factory()->create([
+            $score = rand(8,18);
+            CharacterStatistic::create([
                 'character_id' => $character->id,
                 'statistic_id' => Statistic::where('name', $stat->name)->first()->id,
                 'score'        => $score,
                 'modifier'     => (int) floor(($score - 10) / 2),
-                'proficient'   => fake()->boolean(),
+                'proficient'   => (bool) rand(0,1),
             ]);
         }
         // skills (proficiencies)
         foreach (Skill::all() as $skill) {
-            Proficiency::factory()->create([
+            Proficiency::create([
                 'character_id' => $character->id,
                 'skill_id'     => $skill->id,
-                'proficient'   => fake()->boolean(),
+                'proficient'   => (bool) rand(0,1),
                 'mastery'      => false,
             ]);
         }
@@ -178,10 +199,11 @@ class CharacterBuilderController extends Controller
         if ($character->archetype->spellcaster !== 'NONE') {
             foreach (Spell::all() as $spell) {
                 if (in_array($character->archetype->name, explode(', ', $spell->spell_lists))) {
-                    CharacterSpells::factory()->create([
+                    CharacterSpells::create([
                         'character_id' => $character->id,
                         'spell_id' => $spell->id,
-                        'prepared' => fake()->boolean(),
+                        'prepared' => (bool) rand(0,1),
+                        'always_prepared' => false,
                     ]);
                 }
             }
@@ -192,7 +214,7 @@ class CharacterBuilderController extends Controller
             if (count($slots) < 9) {
                 $slots = array_merge($slots, array_fill(0, 9 - count($slots), 0));
             }
-            CharacterSpellslots::factory()->create([
+            CharacterSpellslots::create([
                 'character_id' => $character->id,
                 'level_one'    => (int) $slots[0],
                 'level_two'    => (int) $slots[1],
@@ -212,7 +234,7 @@ class CharacterBuilderController extends Controller
         foreach (explode(', ', $selection) as $gear) {
             $item = Item::firstWhere('name', $gear);
             if ($item) {
-                Inventory::factory()->create([
+                Inventory::create([
                     'character_id' => $character->id,
                     'equippable_id' => $item->id,
                     'equippable_type' => Item::class,
@@ -221,7 +243,7 @@ class CharacterBuilderController extends Controller
             }
             $armor = Armor::firstWhere('name', $gear);
             if ($armor) {
-                Inventory::factory()->create([
+                Inventory::create([
                     'character_id' => $character->id,
                     'equippable_id' => $armor->id,
                     'equippable_type' => Armor::class,
@@ -230,7 +252,7 @@ class CharacterBuilderController extends Controller
             }
             $weapon = Weapon::firstWhere('name', $gear);
             if ($weapon) {
-                Inventory::factory()->create([
+                Inventory::create([
                     'character_id' => $character->id,
                     'equippable_id' => $weapon->id,
                     'equippable_type' => Weapon::class,
@@ -242,7 +264,7 @@ class CharacterBuilderController extends Controller
         foreach (explode(', ', $character->background->equipment) as $gear) {
             $item = Item::firstWhere('name', $gear);
             if ($item) {
-                Inventory::factory()->create([
+                Inventory::create([
                     'character_id' => $character->id,
                     'equippable_id' => $item->id,
                     'equippable_type' => Item::class,
@@ -251,7 +273,7 @@ class CharacterBuilderController extends Controller
             }
             $armor = Armor::firstWhere('name', $gear);
             if ($armor) {
-                Inventory::factory()->create([
+                Inventory::create([
                     'character_id' => $character->id,
                     'equippable_id' => $armor->id,
                     'equippable_type' => Armor::class,
@@ -260,7 +282,7 @@ class CharacterBuilderController extends Controller
             }
             $weapon = Weapon::firstWhere('name', $gear);
             if ($weapon) {
-                Inventory::factory()->create([
+                Inventory::create([
                     'character_id' => $character->id,
                     'equippable_id' => $weapon->id,
                     'equippable_type' => Weapon::class,
@@ -279,7 +301,7 @@ class CharacterBuilderController extends Controller
             $statName = in_array('Finesse', $properties) && $character->stat('Dexterity') > $character->stat('Strength')
                 ? 'Dexterity'
                 : 'Strength';
-            Action::factory()->create([
+            Action::create([
                 'character_id' => $character->id,
                 'statistic_id' => Statistic::firstWhere('name', $statName)->id,
                 'name' => $weaponModel->name,

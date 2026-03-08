@@ -11,6 +11,14 @@ class Action extends Model
     use HasFactory;
     public $timestamps = false;
 
+    public $fillable = [
+        'character_id',
+        'statistic_id',
+        'name',
+        'damage',
+        'type',
+    ];
+
     public function character() {
         return $this->belongsTo(Character::class);
     }
