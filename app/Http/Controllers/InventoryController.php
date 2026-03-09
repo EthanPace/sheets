@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ItemType;
 use App\Models\Armor;
 use App\Models\Inventory;
 use App\Models\Item;
@@ -16,15 +17,11 @@ class InventoryController extends Controller
         $user = Auth::user();
         $weapons = Weapon::all();
         $armors = Armor::all();
-        $items = Item::whereNot('type',"Spellcasting Focus")
-            ->whereNot('type',"Equipment Pack")
-            ->whereNot('type',"Ammunition")
-            ->whereNot('type',"Magic Item")
-            ->whereNot('type',"Food and Drink")
-            ->get();
-        $focuses = Item::where('type',"Spellcasting Focus")->get();
-        $packs = Item::where('type',"Equipment Pack")->get();
-        $foods = Item::where('type',"Food and Drink")->get();
+        $items = Item::whereNotIn('type',array_merge(ItemType::focuses(), [ItemType::Pack, ItemType::Food]))->get();
+
+        $focuses = Item::whereIn('type',ItemType::focuses())->get();
+        $packs = Item::where('type',ItemType::Pack)->get();
+        $foods = Item::where('type',ItemType::Food)->get();
         $tools = Tools::all();
 
         return view('items.index',  [
