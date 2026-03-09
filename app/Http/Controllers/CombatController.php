@@ -50,7 +50,7 @@ class CombatController extends Controller
             ]);
         }
 
-        return redirect('/combat');
+        return redirect()->route('combat');
     }
 
     public function kill(Character $character) {

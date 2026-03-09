@@ -12,71 +12,93 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('dashboard');
-});
+})->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/characters', [CharacterController::class, 'index']);
-    Route::post('/characters/none', [CharacterController::class, 'none']);
-    Route::get('/characters/{character}', [CharacterController::class, 'show'])->can('view', 'character');
-    Route::post('/characters/{character}/use', [CharacterController::class, 'use'])->can('use', 'character');
+
+    Route::group(['prefix' => 'characters'], function () {
+        Route::get('/', [CharacterController::class, 'index'])->name('characters');
+        Route::post('/none', [CharacterController::class, 'none']);
+        Route::get('/{character}', [CharacterController::class, 'show'])->can('view', 'character');
+        Route::post('/{character}/use', [CharacterController::class, 'use'])->can('use', 'character');
+    });
 
     Route::post('/longrest', [CharacterController::class, 'longrest']);
 
-    Route::get('/builder/character', [CharacterBuilderController::class, 'create']);
-    Route::post('/builder/character', [CharacterBuilderController::class, 'store']);
-    Route::get('/builder/character/{character}', [CharacterBuilderController::class, 'details'])->can('view', 'character');
-    Route::post('/builder/character/{character}', [CharacterBuilderController::class, 'update'])->can('update', 'character');
+    Route::group(['prefix' => 'builder'], function () {
 
-    Route::get('/builder/random', [CharacterBuilderController::class, 'random']);
+        Route::group(['prefix' => 'character'], function () {
+            Route::get('/', [CharacterBuilderController::class, 'create'])->name('builder.character.create');
+            Route::post('/', [CharacterBuilderController::class, 'store']);
+            Route::get('/{character}', [CharacterBuilderController::class, 'details'])->can('view', 'character');
+            Route::post('/{character}', [CharacterBuilderController::class, 'update'])->can('update', 'character');
+        });
 
-    Route::get('/notes', [NoteController::class, 'index']);
-    Route::get('/notes/export', [NoteController::class, 'export']);
-    Route::get('/notes/create', [NoteController::class, 'create']);
-    Route::post('/notes/create', [NoteController::class, 'store']);
-    Route::get('/notes/{note}', [NoteController::class, 'show'])->can('view', 'note');
-    Route::post('/notes/{note}/swatch', [NoteController::class, 'swatch'])->can('update', 'note');
-    Route::get('/notes/{note}/edit', [NoteController::class, 'edit'])->can('update', 'note');
-    Route::post('/notes/{note}/edit', [NoteController::class, 'update'])->can('update', 'note');
-    Route::delete('/notes/{note}/delete', [NoteController::class, 'destroy'])->can('delete', 'note');
+        Route::get('/random', [CharacterBuilderController::class, 'random']);
+    });
 
-    Route::get('/items', [InventoryController::class, 'index']);
+    Route::group(['prefix' => 'notes'], function () {
+        Route::get('/', [NoteController::class, 'index'])->name('notes');
+        Route::get('/export', [NoteController::class, 'export'])->name('notes.export');
+        Route::get('/create', [NoteController::class, 'create'])->name('notes.create');
+        Route::post('/create', [NoteController::class, 'store']);
+        Route::get('/{note}', [NoteController::class, 'show'])->can('view', 'note');
+        Route::post('/{note}/swatch', [NoteController::class, 'swatch'])->can('update', 'note');
+        Route::get('/{note}/edit', [NoteController::class, 'edit'])->can('update', 'note');
+        Route::post('/{note}/edit', [NoteController::class, 'update'])->can('update', 'note');
+        Route::delete('/{note}/delete', [NoteController::class, 'destroy'])->can('delete', 'note');
+    });
 
-    Route::get('/inventory', [InventoryController::class, 'inventory']);
+    Route::get('/items', [InventoryController::class, 'index'])->name('items');
 
-    Route::get('/spells', [SpellController::class, 'index']);
-    Route::get('/spells/{spell}', [SpellController::class, 'show']);
+    Route::get('/inventory', [InventoryController::class, 'inventory'])->name('inventory');
 
-    Route::get('/spellbook', [SpellController::class, 'spellbook']);
+    Route::group(['prefix' => 'spells'], function () {
+        Route::get('/', [SpellController::class, 'index'])->name('spells');
+        Route::get('/{spell}', [SpellController::class, 'show']);
+    });
+
+    Route::get('/spellbook', [SpellController::class, 'spellbook'])->name('spellbook');
 
     Route::post('/cast/{level}', [SpellController::class, 'cast']);
 
-    Route::get('/combat', [CombatController::class, 'index']);
-    Route::post('/combat/damage/{character}', [CombatController::class, 'damage'])->can('update','character');
-    Route::post('/combat/heal/{character}', [CombatController::class, 'heal'])->can('update','character');
-    Route::post('/combat/health/{character}', [CombatController::class, 'health'])->can('update','character');
+    Route::group(['prefix' => 'combat'], function () {
+        Route::get('/', [CombatController::class, 'index'])->name('combat');
+        Route::post('/damage/{character}', [CombatController::class, 'damage'])->can('update','character');
+        Route::post('/heal/{character}', [CombatController::class, 'heal'])->can('update','character');
+        Route::post('/health/{character}', [CombatController::class, 'health'])->can('update','character');
+    });
     
-    Route::post('/initiative/set', [CombatController::class, 'set']);
-    Route::post('/initiative/roll', [CombatController::class, 'roll']);
-    Route::post('/initiative/health/{initiative}', [CombatController::class, 'update']);
-    Route::post('/initiative/kill/{character}', [CombatController::class, 'kill'])->can('use', 'character');   
+    Route::group(['prefix' => 'initiative'], function () {
+        Route::post('/set', [CombatController::class, 'set']);
+        Route::post('/roll', [CombatController::class, 'roll']);
+        Route::post('/health/{initiative}', [CombatController::class, 'update']);
+        Route::post('/kill/{character}', [CombatController::class, 'kill'])->can('use', 'character');
 
-    Route::post('/initiative', [CombatController::class, 'store']);
-    Route::post('/initiative/{initiative}', [CombatController::class, 'update']);
-    Route::delete('/initiative/{initiative}', [CombatController::class, 'destroy']);
+        Route::post('/', [CombatController::class, 'store']);
+        Route::post('/{initiative}', [CombatController::class, 'update']);
+        Route::delete('/{initiative}', [CombatController::class, 'destroy']);
+    });
 
-    Route::get('/profile', [UserController::class, 'show']);
-    Route::get('/profile/password', [UserController::class, 'edit']);
-    Route::post('/profile/password', [UserController::class, 'update']);
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('/', [UserController::class, 'show'])->name('profile');
+        Route::get('/password', [UserController::class, 'edit'])->name('profile.password');
+        Route::post('/password', [UserController::class, 'update']);
+    });
 
-    Route::get('/users', [UserController::class, 'index'])->middleware('admin');
-    Route::get('/users/create', [UserController::class, 'create'])->middleware('admin');
-    Route::post('/users/create', [UserController::class, 'store'])->middleware('admin');
-    Route::post('/users/{user}/password-reset', [UserController::class, 'password_reset'])->middleware('admin');
+    Route::group(['middleware' => 'admin', 'prefix' => 'users'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('users');
+        Route::get('/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('/create', [UserController::class, 'store']);
+        Route::post('/{user}/password-reset', [UserController::class, 'password_reset']);
+    });
 });
 
-Route::get('/nope', function() { return view('auth.dead'); });
-
-Route::get('/login', [SessionController::class, 'create'])->name('login');
-Route::post('/login', [SessionController::class, 'store'])->middleware('throttle:5,1');
+Route::group(['prefix' => 'login'], function () {
+    Route::get('/login', [SessionController::class, 'create'])->name('login');
+    Route::post('/login', [SessionController::class, 'store'])->middleware('throttle:5,1');
+});
 
 Route::post('/logout', [SessionController::class, 'destroy']);
+
+Route::get('/nope', function() { return view('auth.dead'); })->name('nope');

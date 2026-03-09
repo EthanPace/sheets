@@ -50,7 +50,7 @@ class CharacterController extends Controller
             'character_id' => $character->id,
         ]);
 
-        return redirect('/');
+        return redirect()->route('dashboard');
     }
 
     public function none() {
@@ -60,7 +60,7 @@ class CharacterController extends Controller
             'character_id' => null,
         ]);
 
-        return redirect('/characters');
+        return redirect()->route('characters');
     }
 
     public function longrest() {

@@ -20,6 +20,6 @@ class CheckAdmin
             return $next($request);
         }
         
-        return redirect('/nope')->with('error', "Access Denied. APR.");
+        return redirect()->route('nope')->with('error', "Access Denied. APR.");
     }
 }

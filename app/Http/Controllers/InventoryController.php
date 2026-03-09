@@ -64,7 +64,7 @@ class InventoryController extends Controller
             'updated_at' => now(),
         ]);
 
-        return redirect("/items");
+        return redirect()->route('items');
     }
     
     public function inventory() {

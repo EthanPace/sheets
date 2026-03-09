@@ -66,7 +66,7 @@ class NoteController extends Controller
             'updated_at' => now(),
         ]);
 
-        return redirect("/notes");
+        return redirect()->route('notes');
     }
 
     public function create() {
@@ -98,7 +98,7 @@ class NoteController extends Controller
     public function update(Note $note) {
         if (request('act') === "delete") {
             $this->destroy($note);
-            return redirect('/notes');
+            return redirect()->route('notes');
         }
 
         $title = e(request('title'));
