@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Stat;
+use App\Http\Requests\StoreCharacterRequest;
+use App\Http\Requests\UpdateCharacterRequest;
 use App\Models\Action;
 use App\Models\Archetype;
 use App\Models\Armor;
@@ -32,19 +34,8 @@ class CharacterBuilderController extends Controller
         ]);
     }
 
-    public function store() {
-        $valid = request()->validate([
-            'name'         => ['required', 'string', 'max:80'],
-            'species'      => ['required', 'string', Rule::exists('species', 'name')],
-            'archetype'    => ['required', 'string', Rule::exists('archetypes', 'name')],
-            'background'   => ['required', 'string', Rule::exists('backgrounds', 'name')],
-            'strength'     => ['required', 'integer', 'min:1', 'max:20'],
-            'dexterity'    => ['required', 'integer', 'min:1', 'max:20'],
-            'constitution' => ['required', 'integer', 'min:1', 'max:20'],
-            'intelligence' => ['required', 'integer', 'min:1', 'max:20'],
-            'wisdom'       => ['required', 'integer', 'min:1', 'max:20'],
-            'charisma'     => ['required', 'integer', 'min:1', 'max:20'],
-        ]);
+    public function store(StoreCharacterRequest $request) {
+        $valid = $request->validated();
 
         $archetype  = Archetype::firstWhere('name', $valid['archetype']);
         $species    = Species::firstWhere('name', $valid['species']);
@@ -116,24 +107,9 @@ class CharacterBuilderController extends Controller
         ]);
     }
 
-    public function update(Character $character) {
-        $valid = request()->validate([
-            'skills'   => ['nullable', 'array'],
-            'skills.*' => ['required', 'string', Rule::exists('skills', 'name')],
-        ]);
-
+    public function update(UpdateCharacterRequest $request, Character $character) {
+        $valid = $request->validated();
         $selectedSkills = $valid['skills'] ?? [];
-        $limit = $character->archetype->num_skills;
-
-        if (count($selectedSkills) > $limit) {
-            return back()->withErrors(['skills' => "You may only choose {$limit} skill" . ($limit === 1 ? '' : 's') . "."]);
-        }
-
-        foreach ($selectedSkills as $skillName) {
-            if (!$character->can_take($skillName)) {
-                return back()->withErrors(['skills' => 'You cannot select the skill: ' . $skillName]);
-            }
-        }
 
         foreach (Skill::all() as $skill) {
             Proficiency::create([

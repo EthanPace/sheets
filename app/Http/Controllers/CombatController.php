@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreInitiativeRequest;
 use App\Models\Character;
 use App\Models\Initiative;
 use Illuminate\Http\Request;
@@ -61,12 +62,8 @@ class CombatController extends Controller
         return redirect()->back();
     }
 
-    public function store() {
-        $valid = request()->validate([
-            'name' => ['bail', 'string', 'max:30'],
-            'turn_order' => ['integer', 'max:255'],
-            'current_hit_points' => ['integer', 'max:750'],
-        ]);
+    public function store(StoreInitiativeRequest $request) {
+        $valid = $request->validated();
 
         Initiative::create($valid);
 
