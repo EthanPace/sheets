@@ -27,12 +27,12 @@ return new class extends Migration
 
             $table->boolean('draft')->default(true);
 
-            $table->integer('level')->unsigned()->default(0);
+            $table->integer('level')->unsigned()->default(1);
             $table->integer('experience_points')->unsigned()->default(0);
 
-            $table->integer('armor_class')->unsigned()->default(0);
+            $table->integer('armor_class')->unsigned()->default(11);
             $table->integer('initiative')->unsigned()->default(0);
-            $table->integer('proficiency_bonus')->unsigned()->default(0);
+            $table->integer('proficiency_bonus')->unsigned()->default(2);
 
             $table->boolean('inspiration')->default(false);
 
