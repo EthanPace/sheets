@@ -95,8 +95,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::group(['prefix' => 'login'], function () {
-    Route::get('/login', [SessionController::class, 'create'])->name('login');
-    Route::post('/login', [SessionController::class, 'store'])->middleware('throttle:5,1');
+    Route::get('/', [SessionController::class, 'create'])->name('login');
+    Route::post('/', [SessionController::class, 'store'])->middleware('throttle:5,1');
 });
 
 Route::post('/logout', [SessionController::class, 'destroy']);
