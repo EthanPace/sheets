@@ -11,11 +11,27 @@ class Character extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'species_id', 'archetype_id', 'background_id',
-        'name', 'draft', 'level', 'experience_points',
-        'armor_class', 'initiative', 'proficiency_bonus', 'inspiration',
-        'current_hit_points', 'max_hit_points', 'temporary_hit_points',
-        'turn_order', 'current_roll', 'archetype_proficiencies',
+        'user_id',
+        'species_id',
+        'archetype_id',
+        'background_id',
+        'name',
+        'draft',
+        'level',
+        'gold',
+        'silver',
+        'copper',
+        'experience_points',
+        'armor_class',
+        'initiative',
+        'proficiency_bonus',
+        'inspiration',
+        'current_hit_points',
+        'max_hit_points',
+        'temporary_hit_points',
+        'turn_order',
+        'current_roll',
+        'archetype_proficiencies',
     ];
 
     public function user() {

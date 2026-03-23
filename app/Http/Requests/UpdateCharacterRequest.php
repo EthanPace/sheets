@@ -25,6 +25,7 @@ class UpdateCharacterRequest extends FormRequest
         return [
             'skills'   => ['nullable', 'array'],
             'skills.*' => ['required', 'string', Rule::exists('skills', 'name')],
+            'gear'   => ['required', 'string'],
         ];
     }
 

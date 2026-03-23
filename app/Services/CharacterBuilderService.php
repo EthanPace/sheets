@@ -98,7 +98,17 @@ class CharacterBuilderService
 
         $this->attachSkills($character, $skills);
 
-        $this->attachGear($character);
+        $options = explode(' OR ', $character->archetype->starter_gear);
+        $selection = $options[0];
+
+        $allGear = array_merge(
+            explode(', ', $selection),
+            explode(',', $character->background->starting_equipment)
+        );
+
+        $this->addMoney($character, $allGear);
+
+        $this->attachGear($character, $allGear);
 
         $this->attachActions($character);
 
@@ -168,43 +178,31 @@ class CharacterBuilderService
         }
     }
 
-    public function attachGear(Character $character) {
-        // grab random equipment option from archetype
-        $options = explode(' OR ', $character->archetype->starter_gear);
-        $selection = $options[0];
-        // find which ones are items, armors, or weapons and add to inventory
-        foreach (explode(', ', $selection) as $gear) {
-            $item = Item::firstWhere('name', $gear);
-            if ($item) {
-                Inventory::create([
-                    'character_id' => $character->id,
-                    'equippable_id' => $item->id,
-                    'equippable_type' => Item::class,
-                ]);
-                continue;
-            }
-            $armor = Armor::firstWhere('name', $gear);
-            if ($armor) {
-                Inventory::create([
-                    'character_id' => $character->id,
-                    'equippable_id' => $armor->id,
-                    'equippable_type' => Armor::class,
-                ]);
-                continue;
-            }
-            $weapon = Weapon::firstWhere('name', $gear);
-            if ($weapon) {
-                Inventory::create([
-                    'character_id' => $character->id,
-                    'equippable_id' => $weapon->id,
-                    'equippable_type' => Weapon::class,
-                ]);
-                continue;
+    public function addMoney(Character $character, array $strings) {
+        $gold = 0;
+        $silver = 0;
+        $copper = 0;
+
+        foreach ($strings as $string) {
+            if (str_ends_with($string, 'GP')) {
+                $gold += (int) explode(' ', $string)[0];
+            } else if (str_ends_with($string, 'SP')) {
+                $silver += (int) explode(' ', $string)[0];
+            } else if (str_ends_with($string, 'CP')) {
+                $copper += (int) explode(' ', $string)[0];
             }
         }
-        // background only has one option, but still need to find the right types
-        foreach (explode(', ', $character->background->equipment) as $gear) {
-            $item = Item::firstWhere('name', $gear);
+        
+        $character->update([
+            'gold' => $character->gold + $gold,
+            'silver' => $character->silver + $silver,
+            'copper' => $character->copper + $copper,
+        ]);
+    }
+
+    public function attachGear(Character $character, array $gear = []) {
+        foreach ($gear as $gearName) {
+            $item = Item::firstWhere('name', $gearName);
             if ($item) {
                 Inventory::create([
                     'character_id' => $character->id,
@@ -213,7 +211,7 @@ class CharacterBuilderService
                 ]);
                 continue;
             }
-            $armor = Armor::firstWhere('name', $gear);
+            $armor = Armor::firstWhere('name', $gearName);
             if ($armor) {
                 Inventory::create([
                     'character_id' => $character->id,
@@ -222,7 +220,7 @@ class CharacterBuilderService
                 ]);
                 continue;
             }
-            $weapon = Weapon::firstWhere('name', $gear);
+            $weapon = Weapon::firstWhere('name', $gearName);
             if ($weapon) {
                 Inventory::create([
                     'character_id' => $character->id,

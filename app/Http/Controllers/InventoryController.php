@@ -70,10 +70,18 @@ class InventoryController extends Controller
     public function inventory() {
         $user = Auth::user();
         $items = $user->character->inventory;
+        $gold = $user->character->gold;
+        $silver = $user->character->silver;
+        $copper = $user->character->copper;
 
         return view("items.inventory", [
             'user' => $user,
             'items' => $items,
+            'currency' => [
+                'gold' => $gold,
+                'silver' => $silver,
+                'copper' => $copper,
+            ],
         ]);
     }
 }

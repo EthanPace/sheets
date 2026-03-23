@@ -48,16 +48,24 @@ class CharacterBuilderController extends Controller
             'user'      => Auth::user(),
             'character' => $character,
             'skills'    => Skill::all(),
+            'class_gear_options'      => explode(', OR ', $character->archetype->starter_gear),
+            'background_gear' => explode(', ', $character->background->starting_equipment),
         ]);
     }
 
     public function update(Character $character, UpdateCharacterRequest $request, CharacterBuilderService $builder) {
-
         $valid = $request->validated();
+
         $selectedSkills = $valid['skills'] ?? [];
+        $selectedGear = html_entity_decode($valid['gear'] ?? '');
+        $allGear = array_merge(
+            explode(', ', $selectedGear),
+            explode(', ', $character->background->starting_equipment)
+        );
 
         $builder->attachSkills($character, $selectedSkills);
-        $builder->attachGear($character);
+        $builder->addMoney($character, $allGear);
+        $builder->attachGear($character, $allGear);
         $builder->attachActions($character);
 
         $builder->finish($character);

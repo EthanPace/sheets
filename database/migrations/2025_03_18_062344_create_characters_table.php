@@ -29,6 +29,10 @@ return new class extends Migration
 
             $table->integer('level')->unsigned()->default(1);
             $table->integer('experience_points')->unsigned()->default(0);
+            
+            $table->integer('gold')->unsigned()->default(0);
+            $table->integer('silver')->unsigned()->default(0);
+            $table->integer('copper')->unsigned()->default(0);
 
             $table->integer('armor_class')->unsigned()->default(11);
             $table->integer('initiative')->unsigned()->default(0);
